@@ -1,0 +1,35 @@
+{
+    "name": "milcrew/zf2-file-uploader",
+    "description": "File Uploader module for Zf2",
+    "authors": [
+        {
+            "name": "Milcrew",
+            "email": "milcrew@gmail.com"
+        },
+        {
+            "name": "Milotskiy Alexey",
+            "email": "spalaxinco@gmail.com"
+        }
+    ],
+    "keywords": [
+        "zf2",
+        "file-uploader"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3",
+        "zendframework/zendframework": ">=2.0.0",
+        "doctrine/doctrine-module": ">=0.7.2",
+        "doctrine/doctrine-orm-module": ">=0.7.0",
+        "doctrine/migrations": ">=v1.0-ALPHA1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Zf2FileUploader": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
