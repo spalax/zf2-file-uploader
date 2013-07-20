@@ -1,8 +1,8 @@
 <?php
-namespace Zf2FileUploader\Service\Remover;
+namespace Zf2FileUploader\Resource\Remover;
 
 use Doctrine\ORM\EntityManager;
-use Zf2FileUploader\Entity\ResourceInterface;
+use Zf2FileUploader\Resource\ResourceInterface;
 
 class DatabaseRemover implements RemoverInterface
 {
@@ -23,7 +23,9 @@ class DatabaseRemover implements RemoverInterface
     public function remove(ResourceInterface $resource)
     {
         try {
-            $this->entityManager->remove($resource);
+            $this->entityManager->remove($this->entityManager
+                                              ->getReference('Zf2FileUploader\Entity\Resource',
+                                                             $resource->getId()));
         } catch (\Exception $e) {
             return false;
         }

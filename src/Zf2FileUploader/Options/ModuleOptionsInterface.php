@@ -3,4 +3,5 @@ namespace Zf2FileUploader\Options;
 
 interface ModuleOptionsInterface extends TemporaryCleanerOptionsInterface,
                                          PreviewOptionsInterface,
-                                         InputValidatorOptionsInterface {}
+                                         InputValidatorOptionsInterface,
+                                         PersisterOptionsInterface {}

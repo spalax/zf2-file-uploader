@@ -1,7 +1,7 @@
 <?php
-namespace Zf2FileUploader\Service\Remover;
+namespace Zf2FileUploader\Resource\Remover;
 
-use Zf2FileUploader\Entity\ResourceInterface;
+use Zf2FileUploader\Resource\ResourceInterface;
 
 interface RemoverInterface
 {

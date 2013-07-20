@@ -22,7 +22,7 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function __construct(EventManagerInterface $eventManager)
     {
-        $this->eventManager = $eventManager;
+        //$this->eventManager = $eventManager;
 
 //        $this->eventManager->trigger('uploader.request.apply.post', $this, array($request));
     }

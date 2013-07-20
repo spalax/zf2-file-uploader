@@ -2,6 +2,8 @@
 namespace Zf2FileUploader\Service;
 
 use Doctrine\ORM\EntityManager;
+use Zf2FileUploader\Converter\EntityResourceHydrator;
+use Zf2FileUploader\Converter\ResourceHydrator;
 use Zf2FileUploader\Options\TemporaryCleanerOptionsInterface;
 use Zf2FileUploader\Service\Remover\RemoverInterface;
 

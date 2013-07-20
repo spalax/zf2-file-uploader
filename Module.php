@@ -23,8 +23,8 @@ class Module
         $di = $sm->get('di');
 
         $config = $sm->get('config');
-        $options = new ModuleOptions(isset($config['uploader']) ?
-                                           $config['uploader'] :
+        $options = new ModuleOptions(isset($config['zf2fileuploader']) ?
+                                           $config['zf2fileuploader'] :
                                            array());
 
         $di->instanceManager()->addSharedInstance($options, 'Zf2FileUploader\Options\ModuleOptions');
@@ -34,6 +34,8 @@ class Module
         $di->instanceManager()->setTypePreference('Zf2FileUploader\Entity\ImageInterface',
                                                   array($options->getImageEntityClass()));
 
+        \Zf2Libs\Debug\Utility::dump($di->get('Zf2FileUploader\Service\Resource\SaveService'));
+//        \Zf2Libs\Debug\Utility::dump("Fun", $di->get('Zf2FileUploader\Resource\Persister\AggregatePersister'));
 //        $inputFilterManager->addPeeringServiceManager($sm);
     }
 

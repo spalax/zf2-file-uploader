@@ -12,4 +12,16 @@ interface ResourceInterface
      * @return string
      */
     public function getPath();
+
+    /**
+     * @param mixed $id
+     * @return ResourceInterface
+     */
+    public function setId($id);
+
+    /**
+     * @param string $path
+     * @return ResourceInterface
+     */
+    public function setPath($path);
 }

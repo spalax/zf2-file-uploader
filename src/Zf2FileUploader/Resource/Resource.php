@@ -38,4 +38,23 @@ class Resource implements ResourceInterface
         return $this->path;
     }
 
+    /**
+     * @param mixed $id
+     * @return Resource
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @param string $path
+     * @return Resource
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+        return $this;
+    }
 }

@@ -34,11 +34,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     /**
      * @var string
      */
-    protected $temporaryPath = '';
-
-    /**
-     * @var string
-     */
     protected $persistentPath = '';
 
     /**
@@ -81,27 +76,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     public function getPersistentPath()
     {
         return $this->persistentPath;
-    }
-
-    /**
-     * @param string $temporaryPath
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setTemporaryPath($temporaryPath)
-    {
-        $temporaryPath = realpath($temporaryPath);
-        if (!is_dir($temporaryPath) || !is_writable($temporaryPath)) {
-            throw new InvalidArgumentException("Temporary path $temporaryPath is unreachable");
-        }
-        $this->temporaryPath = $temporaryPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemporaryPath()
-    {
-        return $this->temporaryPath;
     }
 
     /**

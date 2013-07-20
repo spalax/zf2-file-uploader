@@ -1,9 +1,9 @@
 <?php
-namespace Zf2FileUploader\Service\Remover;
+namespace Zf2FileUploader\Resource\Remover;
 
-use Zf2FileUploader\Entity\ResourceInterface;
+use Zf2FileUploader\Resource\ResourceInterface;
 
-class Remover implements RemoverInterface
+class AggregateRemover implements RemoverInterface
 {
     /**
      * @var RemoverInterface[]
@@ -25,7 +25,7 @@ class Remover implements RemoverInterface
 
     /**
      * @param RemoverInterface $remover
-     * @return Remover
+     * @return AggregateRemover
      */
     public function addRemover(RemoverInterface $remover)
     {

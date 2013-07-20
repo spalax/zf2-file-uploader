@@ -16,9 +16,9 @@ class CreateRequest extends AbstractRequest
      */
     public function setValidator(ValidatorInterface $validator)
     {
-        $this->eventManager->trigger('uploader.request.setvalidator.pre', $this, array($validator));
+//        $this->eventManager->trigger('uploader.request.setvalidator.pre', $this, array($validator));
         $this->validator = $validator;
-        $this->eventManager->trigger('uploader.request.setvalidator.post', $this, array($this->validator));
+//        $this->eventManager->trigger('uploader.request.setvalidator.post', $this, array($this->validator));
     }
 
     /**

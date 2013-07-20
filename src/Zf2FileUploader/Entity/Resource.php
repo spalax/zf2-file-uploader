@@ -2,6 +2,7 @@
 namespace Zf2FileUploader\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zf2FileUploader\Resource\ResourceInterface;
 
 /**
  * Resource
@@ -35,6 +36,17 @@ class Resource implements ResourceInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @return Resource
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
