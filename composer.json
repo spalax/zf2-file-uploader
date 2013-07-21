@@ -18,6 +18,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3",
+        "milcrew/zf2-libs": "dev-master",
         "zendframework/zendframework": ">=2.0.0",
         "doctrine/doctrine-module": ">=0.7.2",
         "doctrine/doctrine-orm-module": ">=0.7.0",

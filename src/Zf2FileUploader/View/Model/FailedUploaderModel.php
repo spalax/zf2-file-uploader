@@ -1,13 +1,13 @@
 <?php
 namespace Zf2FileUploader\View\Model;
 
-use Zf2FileUploader\InputData\ResourceDataInterface;
+use Zf2FileUploader\MessagesInterface;
 
 class FailedUploaderModel extends UploaderModel
 {
-    public function __construct(ResourceDataInterface $resourceData)
+    public function __construct(MessagesInterface $message)
     {
-        $this->setVariable('status', 'failed');
-        $this->setVariable('messages', $resourceData->getMessages());
+        $this->setVariable('status', static::STATUS_FAILED);
+        $this->setMessages($message);
     }
 }

@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: oleksiimilotskyi
- * Date: 7/20/13
- * Time: 2:21 PM
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Zf2FileUploader\Service\Resource\Response;
 
 use Zf2FileUploader\Resource\ResourceInterface;
@@ -55,7 +47,7 @@ class Response implements ResponseInterface
      */
     public function getResource()
     {
-        $this->resource;
+       return $this->resource;
     }
 
     /**

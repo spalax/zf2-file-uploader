@@ -1,27 +1,34 @@
 <?php
-namespace Front\Controller\Images;
+namespace Zf2FileUploader\Controller\Images;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Front\Paginator\DoctrineQueryRestPaginator;
-use Front\Stdlib\Hydrator\Strategy\DoctrineEntities\Photo;
 use Front\View\Model\PaginatorJsonModel;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
+use Doctrine\ORM\Query\Expr;
+use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 
 class ListController extends AbstractController
 {
     /**
      * @var EntityManager
      */
-    protected $entityManager = null;
+    protected $entityManager;
+
+    /**
+     * @var ImageResourceOptionsInterface
+     */
+    protected $options;
 
     /**
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, ImageResourceOptionsInterface $options)
     {
         $this->entityManager = $entityManager;
+        $this->options = $options;
     }
 
     /* (non-PHPdoc)
@@ -29,13 +36,16 @@ class ListController extends AbstractController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $paginator = new DoctrineQueryRestPaginator($this->entityManager
-                                                         ->getRepository('Front\Entities\Photo')
-                                                         ->createQueryBuilder('gp'),
+        $query = $this->entityManager->createQuery("SELECT r FROM Zf2FileUploader\Entity\Resource r
+                                                    WHERE r IN (SELECT IDENTITY(i.resource)
+                                                                FROM {$this->options->getImageEntityClass()} i)");
+
+        $paginator = new DoctrineQueryRestPaginator($query,
                                                     $e->getRequest(),
                                                     $e->getResponse());
 
-        $objectHydrator = new DoctrineObject($this->entityManager, 'Front\Entities\Photo');
+        $objectHydrator = new DoctrineObject($this->entityManager,
+                                             'Zf2FileUploader\Entity\Resource');
 
         $result = new PaginatorJsonModel($objectHydrator);
         $result->setPaginator($paginator);

@@ -27,7 +27,8 @@ return array(
 
     'allowed_controllers' => array(
         // this config is required, otherwise the MVC won't even attempt to ask Di for the controller!
-        'Zf2FileUploader\Controller\Images\CreateController'
+        'Zf2FileUploader\Controller\Images\CreateController',
+        'Zf2FileUploader\Controller\Images\ListController'
     ),
 
     'instance' => array(
@@ -53,7 +54,9 @@ return array(
         'Zf2FileUploader\Resource\Persister\AggregatePersister' => array(
             'injections' => array(
                 'Zf2FileUploader\Resource\Persister\FilesystemPersister',
-                'Zf2FileUploader\Resource\Persister\DatabasePersister'
+                'Zf2FileUploader\Resource\Persister\DatabasePersister',
+                'Zf2FileUploader\Resource\Persister\Image\FilesystemPersister',
+                'Zf2FileUploader\Resource\Persister\Image\DatabasePersister'
             )
         ),
 
@@ -87,7 +90,7 @@ return array(
             'Zf2FileUploader\Options\TemporaryCleanerOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\Options\InputValidatorOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\Options\PersisterOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\Options\ImagePersisterOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
+            'Zf2FileUploader\Options\ImageResourceOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\I18n\Translator\TranslatorInterface' => 'Zf2FileUploader\I18n\Translator\Translator',
             'Zend\EventManager\EventManagerInterface' => 'EventManager',
             'Zend\ServiceManager\ServiceLocatorInterface' => 'ServiceManager'

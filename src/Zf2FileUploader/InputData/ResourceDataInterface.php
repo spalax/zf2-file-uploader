@@ -22,9 +22,4 @@ interface ResourceDataInterface
      * @return boolean
      */
     public function isValid();
-
-    /**
-     * @return string[]
-     */
-    public function getMessages();
 }

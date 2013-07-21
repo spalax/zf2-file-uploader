@@ -5,4 +5,4 @@ interface ModuleOptionsInterface extends TemporaryCleanerOptionsInterface,
                                          PreviewOptionsInterface,
                                          InputValidatorOptionsInterface,
                                          PersisterOptionsInterface,
-                                         ImagePersisterOptionsInterface {}
+                                         ImageResourceOptionsInterface {}

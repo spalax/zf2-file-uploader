@@ -27,9 +27,9 @@ class Module
                                            $config['zf2fileuploader'] :
                                            array());
 
+        $entityManager = $sm->get('Doctrine\ORM\EntityManager');
         $di->instanceManager()->addSharedInstance($options, 'Zf2FileUploader\Options\ModuleOptions');
-        $di->instanceManager()->addSharedInstance($sm->get('Doctrine\ORM\EntityManager'),
-                                                           'Doctrine\ORM\EntityManager');
+        $di->instanceManager()->addSharedInstance($entityManager, 'Doctrine\ORM\EntityManager');
 
         $di->instanceManager()->setTypePreference('Zf2FileUploader\Entity\ImageInterface',
                                                   array($options->getImageEntityClass()));

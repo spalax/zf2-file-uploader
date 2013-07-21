@@ -6,6 +6,7 @@ use Zend\Mvc\MvcEvent;
 use Zf2FileUploader\InputData\CreateImageResourceData;
 use Zf2FileUploader\InputData\ResourceDataInterface;
 use Zf2FileUploader\Service\Resource\SaveService;
+use Zf2FileUploader\View\Model\ResponseUploaderModel;
 
 class CreateController extends AbstractCreateController
 {
@@ -27,6 +28,7 @@ class CreateController extends AbstractCreateController
 
     public function onDispatch(MvcEvent $e)
     {
-        \Zf2Libs\Debug\Utility::dump($this->saveService->saveCollection($this->createResourceData->getResources()));
+        $responses = $this->saveService->saveCollection($this->createResourceData->getResources());
+        $e->setResult(new ResponseUploaderModel($responses));
     }
 }

@@ -2,18 +2,18 @@
 namespace Zf2FileUploader\Resource\Persister\Image;
 
 use Zend\Filter\File\Rename;
-use Zf2FileUploader\Options\ImagePersisterOptionsInterface;
+use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 use Zf2FileUploader\Resource\Persister\AbstractFilesystemPersister;
 use Zf2FileUploader\Resource\ResourceInterface;
 
 class FilesystemPersister extends AbstractFilesystemPersister
 {
     /**
-     * @var ImagePersisterOptionsInterface
+     * @var ImageResourceOptionsInterface
      */
     protected $options;
 
-    public function __construct(ImagePersisterOptionsInterface $options)
+    public function __construct(ImageResourceOptionsInterface $options)
     {
         $this->options = $options;
     }

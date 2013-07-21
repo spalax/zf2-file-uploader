@@ -13,7 +13,7 @@ return array(
                     'options' => array(
                         'verb' => 'get',
                         'defaults' => array(
-                            'controller' => 'Zf2FileUploader\Controller\Images\CreateController'
+                            'controller' => 'Zf2FileUploader\Controller\Images\ListController'
                         )
                     )
                 ),

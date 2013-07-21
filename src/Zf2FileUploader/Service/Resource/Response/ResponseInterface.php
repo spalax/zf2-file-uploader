@@ -1,9 +1,10 @@
 <?php
 namespace Zf2FileUploader\Service\Resource\Response;
 
+use Zf2FileUploader\MessagesInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
 
-interface ResponseInterface
+interface ResponseInterface extends MessagesInterface
 {
     /**
      * @param string $message

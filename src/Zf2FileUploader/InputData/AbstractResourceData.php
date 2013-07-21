@@ -1,6 +1,7 @@
 <?php
 namespace Zf2FileUploader\InputData;
 
+use Zf2FileUploader\MessagesInterface;
 use Zf2FileUploader\Resource\ResourceFactory;
 use Zf2FileUploader\Resource\ResourceFactoryInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
@@ -9,7 +10,9 @@ use Zf2FileUploader\InputData\Exception\InvalidArgumentException as InputDataInv
 use Zend\InputFilter\FileInput;
 use Zend\InputFilter\InputFilter;
 
-abstract class AbstractResourceData extends InputFilter implements ResourceDataInterface
+abstract class AbstractResourceData extends InputFilter
+          implements ResourceDataInterface,
+                     MessagesInterface
 {
     /**
      * @var ResourceFactoryInterface | null
