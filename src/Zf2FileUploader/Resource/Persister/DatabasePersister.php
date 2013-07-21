@@ -6,13 +6,8 @@ use Zf2FileUploader\Entity\Resource;
 use Zf2FileUploader\Resource\Persister\PersisterInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
 
-class DatabasePersister implements PersisterInterface
+class DatabasePersister extends AbstractDatabasePersister
 {
-    /**
-     * @var EntityManager
-     */
-    protected $entityManager;
-
     /**
      * @var Resource
      */
@@ -20,7 +15,7 @@ class DatabasePersister implements PersisterInterface
 
     public function __construct(EntityManager $entityManager, Resource $resourceEntity)
     {
-        $this->entityManager = $entityManager;
+        parent::__construct($entityManager);
         $this->resourceEntity = $resourceEntity;
     }
 
@@ -28,17 +23,19 @@ class DatabasePersister implements PersisterInterface
      * @param ResourceInterface $resource
      * @return boolean
      */
-    public function persist(ResourceInterface $resource)
+    public function run(ResourceInterface $resource)
     {
-        $this->resourceEntity->setPath($resource->getPath());
-        $this->entityManager->persist($this->resourceEntity);
-        $this->entityManager->flush($this->resourceEntity);
-        return true;
-    }
+        $resourceEntity = clone $this->resourceEntity;
 
-    public function revert()
-    {
-        //$this->entityManager->
-//        $this->entityManager->clear($this->resourceEntity);
+        $resourceEntity->setPath($resource->getPath());
+        $resourceEntity->setToken($resource->getId());
+        $resourceEntity->setTemp(1);
+
+        $this->entityManager->persist($resourceEntity);
+        $this->entityManager->flush($resourceEntity);
+
+        $resource->setEntity($resourceEntity);
+
+        return true;
     }
 }

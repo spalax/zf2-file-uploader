@@ -34,9 +34,11 @@ class Module
         $di->instanceManager()->setTypePreference('Zf2FileUploader\Entity\ImageInterface',
                                                   array($options->getImageEntityClass()));
 
-        \Zf2Libs\Debug\Utility::dump($di->get('Zf2FileUploader\Service\Resource\SaveService'));
-//        \Zf2Libs\Debug\Utility::dump("Fun", $di->get('Zf2FileUploader\Resource\Persister\AggregatePersister'));
-//        $inputFilterManager->addPeeringServiceManager($sm);
+        $translator = $options->getTranslator();
+        if (!is_null($translator) && class_exists($translator)) {
+            $di->instanceManager()->setParameters('Zf2FileUploader\I18n\Translator\Translator',
+                                                  array('translator' => $translator));
+        }
     }
 
     public function getConfig()

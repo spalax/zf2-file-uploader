@@ -11,5 +11,10 @@ interface PersisterInterface
      */
     public function persist(ResourceInterface $resource);
 
-    public function revert();
+    /**
+     * @return boolean
+     */
+    public function commit();
+
+    public function rollback();
 }

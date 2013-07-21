@@ -25,7 +25,17 @@ class Image implements ImageInterface
      *
      * @ORM\Column(name="alt", type="string", length=250, nullable=false)
      */
-    private $alt;
+    private $alt = '';
+
+    /**
+     * @var \Resource
+     *
+     * @ORM\OneToOne(targetEntity="Resource", inversedBy="image", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="resource_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
+     */
+    private $resource;
 
     /**
      * Get id
@@ -41,22 +51,45 @@ class Image implements ImageInterface
      * Set alt
      *
      * @param string $alt
-     * @return Photo
+     * @return Image
      */
     public function setAlt($alt)
     {
         $this->alt = $alt;
-    
+
         return $this;
     }
 
     /**
      * Get alt
      *
-     * @return string 
+     * @return string
      */
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * Set resource
+     *
+     * @param \Zf2FileUploader\Entity\Resource $resource
+     * @return Image
+     */
+    public function setResource(\Zf2FileUploader\Entity\Resource $resource = null)
+    {
+        $this->resource = $resource;
+
+        return $this;
+    }
+
+    /**
+     * Get resource
+     *
+     * @return \Zf2FileUploader\Entity\Resource
+     */
+    public function getResource()
+    {
+        return $this->resource;
     }
 }

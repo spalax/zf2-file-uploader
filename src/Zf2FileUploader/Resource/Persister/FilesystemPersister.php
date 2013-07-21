@@ -1,12 +1,12 @@
 <?php
 namespace Zf2FileUploader\Resource\Persister;
 
-use Zend\Filter\File\RenameUpload;
+use Zend\Filter\File\Rename;
 use Zf2FileUploader\Options\PersisterOptionsInterface;
-use Zf2FileUploader\Resource\Persister\PersisterInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2Libs\Filter\File\ExtensionExtractor;
 
-class FilesystemPersister implements PersisterInterface
+class FilesystemPersister extends AbstractFilesystemPersister
 {
     /**
      * @var PersisterOptionsInterface
@@ -16,7 +16,7 @@ class FilesystemPersister implements PersisterInterface
     /**
      * @var \Callable
      */
-    protected $persisted = null;
+    protected $revertClb = null;
 
     public function __construct(PersisterOptionsInterface $options)
     {
@@ -29,45 +29,24 @@ class FilesystemPersister implements PersisterInterface
      */
     public function persist(ResourceInterface $resource)
     {
-        $this->persisted = null;
-        $ext = pathinfo($resource->getPath(), PATHINFO_EXTENSION);
-
+        $ext = $resource->getExt();
         $target = realpath($this->options->getPersistentPath()).'/'.uniqid().($ext ? '.'.$ext : '');
 
-        $moveUploadedFilter = new RenameUpload(array(
+        $moveUploadedFilter = new Rename(array(
             'target'               => $target,
-            'use_upload_name'      => false,
-            'use_upload_extension' => true,
             'overwrite'            => false,
             'randomize'            => false,
         ));
 
+        $moveUploadedFilter->filter($resource->getPath());
         $resource->setPath($target);
 
-        $this->persisted = function () use ($resource, $moveUploadedFilter) {
-            try {
-                $moveUploadedFilter->filter($resource->getPath());
-            } catch (\Exception $e) {
-                return false;
+        $this->setCallbacks(null, function () use ($target) {
+            if (file_exists($target)) {
+                unlink($target);
             }
-            return true;
-        };
+        });
 
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function flush()
-    {
-        $func = $this->persisted;
-        return $func();
-    }
-
-    public function revert()
-    {
-        $this->persisted = null;
-        return true;
+        return file_exists($target);
     }
 }

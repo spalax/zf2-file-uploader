@@ -1,13 +1,13 @@
 <?php
 namespace Zf2FileUploader\Resource\Remover;
 
-use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2FileUploader\Resource\ResourceRemovableInterface;
 
 interface RemoverInterface
 {
     /**
-     * @param ResourceInterface $resource
+     * @param ResourceRemovableInterface $resource
      * @return boolean
      */
-    public function remove(ResourceInterface $resource);
+    public function remove(ResourceRemovableInterface $resource);
 }

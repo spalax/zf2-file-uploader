@@ -7,4 +7,5 @@ interface ImageInterface
     public function getAlt();
 
     public function setAlt($alt);
+    public function setResource(Resource $resource);
 }

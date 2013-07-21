@@ -11,12 +11,16 @@ class AggregatePersister implements PersisterInterface
     protected $persisters = array();
 
     /**
+     * @var PersisterInterface[]
+     */
+    protected $persisted = array();
+
+    /**
      * @param PersisterInterface $persister
      * @return AggregatePersister
      */
     public function addPersister(PersisterInterface $persister)
     {
-        \Zf2Libs\Debug\Utility::dumpAlive("addPersister=>", get_class($persister));
         $this->persisters[] = $persister;
         return $this;
     }
@@ -27,32 +31,32 @@ class AggregatePersister implements PersisterInterface
      */
     public function persist(ResourceInterface $resource)
     {
+        $this->persisted = array();
+
         foreach ($this->persisters as $persister) {
-            if (!$persister->persist($resource)) {
-                $this->revert();
+            $result = $persister->persist($resource);
+            $this->persisted[] = $persister;
+            if (!$result) {
                 return false;
             }
         }
-
         return true;
     }
 
-    public function revert()
+    public function commit()
     {
-        foreach ($this->persisters as $persister) {
-            $persister->revert();
-        }
-    }
-
-    public function flush()
-    {
-        foreach ($this->persisters as $persister) {
-            if (!$persister->flush()) {
-                $this->revert();
+        foreach ($this->persisted as $persister) {
+            if (!$persister->commit()) {
                 return false;
             }
         }
-
         return true;
+    }
+
+    public function rollback()
+    {
+        foreach (array_reverse($this->persisted) as $persister) {
+            $persister->rollback();
+        }
     }
 }

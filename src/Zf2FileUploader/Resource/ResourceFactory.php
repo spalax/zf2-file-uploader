@@ -1,6 +1,8 @@
 <?php
 namespace Zf2FileUploader\Resource;
 
+use Zf2Libs\Filter\File\ExtensionExtractor;
+
 class ResourceFactory implements ResourceFactoryInterface
 {
     /**
@@ -9,6 +11,9 @@ class ResourceFactory implements ResourceFactoryInterface
      */
     public function createResource($data)
     {
-        return new Resource($data['tmp_name']);
+        $filter = new ExtensionExtractor();
+        $ext = $filter->filter($data['tmp_name']);
+
+        return new Resource($data['tmp_name'], $ext);
     }
 }

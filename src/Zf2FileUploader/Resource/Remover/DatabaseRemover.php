@@ -2,7 +2,8 @@
 namespace Zf2FileUploader\Resource\Remover;
 
 use Doctrine\ORM\EntityManager;
-use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2FileUploader\Entity\Resource;
+use Zf2FileUploader\Resource\ResourceRemovableInterface;
 
 class DatabaseRemover implements RemoverInterface
 {
@@ -17,15 +18,26 @@ class DatabaseRemover implements RemoverInterface
     }
 
     /**
-     * @param ResourceInterface $resource
+     * @param ResourceRemovableInterface $resource
      * @return boolean
      */
-    public function remove(ResourceInterface $resource)
+    public function remove(ResourceRemovableInterface $resource)
     {
         try {
-            $this->entityManager->remove($this->entityManager
-                                              ->getReference('Zf2FileUploader\Entity\Resource',
-                                                             $resource->getId()));
+            $entity = null;
+            if ($resource instanceof Resource) {
+                $entity = $resource;
+            } else {
+                $entity = $this->entityManager->getRepository('Zf2FileUploader\Entity\Resource')
+                               ->findOneByToken($resource->getId());
+
+                if (is_null($entity)) {
+                    return false;
+                }
+            }
+
+            $this->entityManager->remove($entity);
+            $this->entityManager->flush($entity);
         } catch (\Exception $e) {
             return false;
         }

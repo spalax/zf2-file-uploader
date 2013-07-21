@@ -9,7 +9,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     /**
      * @var int
      */
-    protected $ttl = 10;
+    protected $ttl = 4;
 
     /**
      * @var string
@@ -39,7 +39,33 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     /**
      * @var string
      */
+    protected $imagePersistentPath = '';
+
+    /**
+     * @var string
+     */
     protected $fileInputName = 'file';
+
+    /**
+     * @var string | null
+     */
+    protected $translator = null;
+
+    /**
+     * @param string $translator
+     */
+    public function setTranslator($translator)
+    {
+        $this->translator = $translator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
 
     /**
      * @param string $fileInputName
@@ -76,6 +102,26 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     public function getPersistentPath()
     {
         return $this->persistentPath;
+    }
+
+    /**
+     * @param string $imagePersistentPath
+     */
+    public function setImagePersistentPath($imagePersistentPath)
+    {
+        $imagePersistentPath = realpath($imagePersistentPath);
+        if (!is_dir($imagePersistentPath) || !is_writable($imagePersistentPath)) {
+            throw new InvalidArgumentException("Persistent path $imagePersistentPath is unreachable");
+        }
+        $this->imagePersistentPath = $imagePersistentPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePersistentPath()
+    {
+        return $this->imagePersistentPath;
     }
 
     /**

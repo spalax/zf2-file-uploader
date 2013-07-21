@@ -11,6 +11,10 @@ return array(
 
     'di' => include __DIR__ . '/module/di.config.php',
 
+    'zf2fileuploader' => array(
+
+    ),
+
     'doctrine' => array(
         'driver' => array(
             'front_driver' => array(
