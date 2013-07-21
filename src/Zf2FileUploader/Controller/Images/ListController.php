@@ -3,8 +3,8 @@ namespace Zf2FileUploader\Controller\Images;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
-use Front\Paginator\DoctrineQueryRestPaginator;
-use Front\View\Model\PaginatorJsonModel;
+use Zf2FileUploader\Paginator\DoctrineQueryRestPaginator;
+use Zf2FileUploader\View\Model\PaginatorJsonModel;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Doctrine\ORM\Query\Expr;
