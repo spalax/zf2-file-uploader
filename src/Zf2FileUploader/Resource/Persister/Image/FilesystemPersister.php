@@ -25,7 +25,8 @@ class FilesystemPersister extends AbstractFilesystemPersister
     public function persist(ResourceInterface $resource)
     {
         $ext = $resource->getExt();
-        $target = realpath($this->options->getImagePersistentPath()).'/'.uniqid().($ext ? '.'.$ext : '');
+        $baseName = uniqid().($ext ? '.'.$ext : '');
+        $target = realpath($this->options->getImagePersistentPath()).'/'.$baseName;
 
         $moveUploadedFilter = new Rename(array(
             'target'               => $target,
@@ -34,11 +35,14 @@ class FilesystemPersister extends AbstractFilesystemPersister
         ));
 
         $oldPath = $resource->getPath();
+        $oldHttpPath = $resource->getHttpPath();
+
         $moveUploadedFilter->filter($resource->getPath());
 
         $resource->setPath($target);
+        $resource->setHttpPath($this->options->getImageHttpPath().'/'.$baseName);
 
-        $this->setCallbacks(null, function () use ($resource, $target, $oldPath) {
+        $this->setCallbacks(null, function () use ($resource, $target, $oldPath, $oldHttpPath) {
             if (file_exists($target)) {
                 $moveUploadedFilter = new Rename(array(
                     'target'               => $oldPath,
@@ -47,7 +51,9 @@ class FilesystemPersister extends AbstractFilesystemPersister
                 ));
                 $moveUploadedFilter->filter($target);
             }
+
             $resource->setPath($oldPath);
+            $resource->setHttpPath($oldHttpPath);
         });
 
         return file_exists($target);

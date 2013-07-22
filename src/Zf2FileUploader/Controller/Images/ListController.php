@@ -36,16 +36,14 @@ class ListController extends AbstractController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $query = $this->entityManager->createQuery("SELECT r FROM Zf2FileUploader\Entity\Resource r
-                                                    WHERE r IN (SELECT IDENTITY(i.resource)
-                                                                FROM {$this->options->getImageEntityClass()} i)");
-
-        $paginator = new DoctrineQueryRestPaginator($query,
+        $paginator = new DoctrineQueryRestPaginator($this->entityManager
+                                                         ->getRepository($this->options->getImageEntityClass())
+                                                         ->createQueryBuilder('img'),
                                                     $e->getRequest(),
                                                     $e->getResponse());
 
         $objectHydrator = new DoctrineObject($this->entityManager,
-                                             'Zf2FileUploader\Entity\Resource');
+                                             $this->options->getImageEntityClass());
 
         $result = new PaginatorJsonModel($objectHydrator);
         $result->setPaginator($paginator);

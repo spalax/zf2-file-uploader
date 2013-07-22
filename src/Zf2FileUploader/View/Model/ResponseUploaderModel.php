@@ -1,7 +1,8 @@
 <?php
 namespace Zf2FileUploader\View\Model;
 
-use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2FileUploader\Options\ImageResourceOptionsInterface;
+use Zf2FileUploader\Resource\ResourceViewableInterface;
 use Zf2FileUploader\Service\Resource\Response\ResponseInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
 
@@ -32,12 +33,14 @@ class ResponseUploaderModel extends UploaderModel
     }
 
     /**
-     * @param ResourceInterface $resource
+     * @param ResourceViewableInterface $resource
      */
-    protected function addResource(ResourceInterface $resource)
+    protected function addResource(ResourceViewableInterface $resource)
     {
         $resources = $this->getVariable('resources', array());
-        $resources[] = $resource->getPath();
+
+        $resources[] = $resource->getHttpPath();
+
         $this->setVariable('resources', $resources);
     }
 }

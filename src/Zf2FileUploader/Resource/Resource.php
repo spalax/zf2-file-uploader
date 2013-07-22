@@ -13,6 +13,11 @@ class Resource implements ResourceInterface
     /**
      * @var string
      */
+    protected $httpPath = '';
+
+    /**
+     * @var string
+     */
     protected $ext = '';
 
     /**
@@ -35,6 +40,22 @@ class Resource implements ResourceInterface
         $this->token = is_null($token) ? uniqid(md5($path)) : $token;
         $this->ext = $ext;
         $this->path = $path;
+    }
+
+    /**
+     * @param string $httpPath
+     */
+    public function setHttpPath($httpPath)
+    {
+        $this->httpPath = $httpPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHttpPath()
+    {
+        return $this->httpPath;
     }
 
     /**

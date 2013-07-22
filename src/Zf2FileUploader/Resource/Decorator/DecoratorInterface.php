@@ -1,13 +1,13 @@
 <?php
-namespace Zf2FileUploader\Resource\Handler;
+namespace Zf2FileUploader\Resource\Decorator;
 
 use Zf2FileUploader\Resource\ResourceInterface;
 
-interface HandlerInterface
+interface DecoratorInterface
 {
     /**
      * @param ResourceInterface $resource
      * @return boolean
      */
-    public function handle(ResourceInterface $resource);
+    public function decorate(ResourceInterface $resource);
 }

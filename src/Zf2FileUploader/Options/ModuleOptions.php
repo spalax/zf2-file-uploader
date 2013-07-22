@@ -2,6 +2,7 @@
 namespace Zf2FileUploader\Options;
 
 use Zf2FileUploader\Options\Exception\InvalidArgumentException;
+use Zf2FileUploader\Options\Exception\DomainException;
 use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
@@ -15,6 +16,16 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var string
      */
     protected $imageEntityClass = 'Zf2FileUploader\Entity\Image';
+
+    /**
+     * @var string
+     */
+    protected $imageHttpPath = '';
+
+    /**
+     * @var array
+     */
+    protected $thumbnailerThumbs = array();
 
     /**
      * @var int
@@ -50,6 +61,88 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var string | null
      */
     protected $translator = null;
+
+    /**
+     * @var int
+     */
+    protected $resizeWidth = 100;
+
+    /**
+     * @var int
+     */
+    protected $resizeHeight = 100;
+
+    /**
+     * @param string | array $thumbnailerThumbs
+     */
+    public function setThumbnailerThumbs($thumbnailerThumbs)
+    {
+        if (is_string($thumbnailerThumbs)) {
+            $this->thumbnailerThumbs = array($thumbnailerThumbs);
+        } else if (is_array($thumbnailerThumbs)) {
+            $this->thumbnailerThumbs = $thumbnailerThumbs;
+        } else {
+            throw new DomainException("thumbnailer_thumbs must be string {width}x{height} or
+                                       array of such kind strings");
+        }
+
+    }
+
+    /**
+     * @return array
+     */
+    public function getThumbnailerThumbs()
+    {
+        return $this->thumbnailerThumbs;
+    }
+
+    /**
+     * @param string $imageHttpPath
+     */
+    public function setImageHttpPath($imageHttpPath)
+    {
+        $this->imageHttpPath = $imageHttpPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageHttpPath()
+    {
+        return $this->imageHttpPath;
+    }
+
+    /**
+     * @param int $resizeHeight
+     */
+    public function setResizeHeight($resizeHeight)
+    {
+        $this->resizeHeight = $resizeHeight;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResizeHeight()
+    {
+        return $this->resizeHeight;
+    }
+
+    /**
+     * @param int $resizeWidth
+     */
+    public function setResizeWidth($resizeWidth)
+    {
+        $this->resizeWidth = $resizeWidth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResizeWidth()
+    {
+        return $this->resizeWidth;
+    }
 
     /**
      * @param string $translator

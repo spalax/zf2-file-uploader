@@ -16,9 +16,9 @@ class SaveService
     protected $persister;
 
     /**
-     * @var HandleService | null
+     * @var DecorateService | null
      */
-    protected $handleService = null;
+    protected $decorateService = null;
 
     /**
      * @var TranslatorInterface
@@ -44,16 +44,16 @@ class SaveService
 
     /**
      * @param PersisterInterface $persister
-     * @param HandleService $handleService
+     * @param DecorateService $decorateService
      * @param TranslatorInterface $translator
      */
     public function __construct(PersisterInterface $persister,
-                                HandleService $handleService = null,
+                                DecorateService $decorateService = null,
                                 CleanerStrategyInterface $cleaner,
                                 TranslatorInterface $translator)
     {
         $this->persister = $persister;
-        $this->handleService = $handleService;
+        $this->decorateService = $decorateService;
         $this->translator = $translator;
         $this->cleaner = $cleaner;
     }
@@ -61,7 +61,8 @@ class SaveService
     /**
      * @param ResourceInterface $resource
      * @param ResponseInterface $response
-     * @return ResponseInterface
+     * @return Response|ResponseInterface
+     * @throws \Exception
      */
     public function save(ResourceInterface $resource, ResponseInterface $response = null)
     {
@@ -72,12 +73,23 @@ class SaveService
         $this->cleaner->clean();
 
         try {
+
             if (!$this->persister->persist($resource)) {
                 $message = $this->translator->translate($this->translateMessages[self::MESSAGE_COULD_NOT_PERSIST]);
                 $response->addMessage(sprintf($message, $resource->getPath()));
                 $response->fail();
-                $this->persister->rollback();
                 return $response;
+            }
+
+            if (!is_null($this->decorateService)) {
+                $handleResponse = $this->decorateService->decorate($resource);
+                if (!$handleResponse->isSuccess()) {
+                    foreach($handleResponse->getMessages() as $message) {
+                        $response->addMessage($message);
+                    }
+                    $response->fail();
+                    return $response;
+                }
             }
 
             $this->persister->commit();
@@ -85,17 +97,6 @@ class SaveService
         } catch (\Exception $e) {
             $this->persister->rollback();
             throw $e;
-        }
-
-        if (!is_null($this->handleService)) {
-            $handleResponse = $this->handleService->handle($resource);
-            if (!$handleResponse->isSuccess()) {
-                foreach($handleResponse->getMessages() as $message) {
-                    $response->addMessage($message);
-                }
-                $response->fail();
-                return $response;
-            }
         }
 
         return $response;

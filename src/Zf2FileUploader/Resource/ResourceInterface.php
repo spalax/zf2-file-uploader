@@ -3,7 +3,7 @@ namespace Zf2FileUploader\Resource;
 
 use Zf2FileUploader\Entity\Resource as ResourceEntity;
 
-interface ResourceInterface extends ResourceRemovableInterface
+interface ResourceInterface extends ResourceRemovableInterface, ResourceViewableInterface
 {
     /**
      * @return mixed

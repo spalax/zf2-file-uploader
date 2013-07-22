@@ -16,9 +16,9 @@ return array(
                 )
             ),
 
-            'Zf2FileUploader\Resource\Handler\AggregateHandler' => array(
-                'addHandler' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Handler\HandlerInterface',
+            'Zf2FileUploader\Resource\Decorator\AggregateDecorator' => array(
+                'addDecorator' => array(
+                    array('type' => 'Zf2FileUploader\Resource\Decorator\DecoratorInterface',
                           'required' => true)
                 )
             )
@@ -53,10 +53,8 @@ return array(
 
         'Zf2FileUploader\Resource\Persister\AggregatePersister' => array(
             'injections' => array(
-                'Zf2FileUploader\Resource\Persister\FilesystemPersister',
-                'Zf2FileUploader\Resource\Persister\DatabasePersister',
-                'Zf2FileUploader\Resource\Persister\Image\FilesystemPersister',
-                'Zf2FileUploader\Resource\Persister\Image\DatabasePersister'
+                'Zf2FileUploader\Resource\Persister\GenericPersisterStrategy',
+                'Zf2FileUploader\Resource\Persister\Image\ImagePersisterStrategy'
             )
         ),
 
@@ -80,9 +78,9 @@ return array(
             )
         ),
 
-        'Zf2FileUploader\Service\Resource\HandleService' => array(
+        'Zf2FileUploader\Service\Resource\DecorateService' => array(
             'parameters' => array(
-                'handler' => 'Zf2FileUploader\Resource\Handler\AggregateHandler'
+                'decorator' => 'Zf2FileUploader\Resource\Decorator\AggregateDecorator'
             )
         ),
 

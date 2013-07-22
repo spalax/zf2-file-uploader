@@ -11,8 +11,8 @@ use Zend\Http\PhpEnvironment\Response as HttpResponse;
 
 abstract class AbstractCreateController extends AbstractController
 {
-    const EVENT_INVALID_DATA_PRE_HANDLER = 'uploader.create.invalid.data.preHandler';
-    const EVENT_INVALID_DATA_POST_HANDLER = 'uploader.create.invalid.data.postHandler';
+    const EVENT_INVALID_DATA_PRE_HANDLER = 'uploader.create.invalid.data.preDecorator';
+    const EVENT_INVALID_DATA_POST_HANDLER = 'uploader.create.invalid.data.postDecorator';
 
     /**
      * @var ResourceDataInterface

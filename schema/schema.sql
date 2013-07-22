@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `resource_id` int(11) unsigned NOT NULL,
+  `http_path` varchar(500) NOT NULL,
   `alt` varchar(250) NOT NULL,
   `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

@@ -51,6 +51,12 @@ class DatabasePersister extends AbstractDatabasePersister
         $imageEntity = clone $this->imageEntity;
 
         $imageEntity->setResource($resourceEntity);
+
+        if (strlen(trim($resource->getHttpPath())) < 1) {
+            return false;
+        }
+
+        $imageEntity->setHttpPath($resource->getHttpPath());
         $resourceEntity->setTemp(0);
 
         $this->entityManager->persist($resourceEntity);

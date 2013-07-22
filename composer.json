@@ -22,7 +22,8 @@
         "zendframework/zendframework": ">=2.0.0",
         "doctrine/doctrine-module": ">=0.7.2",
         "doctrine/doctrine-orm-module": ">=0.7.0",
-        "doctrine/migrations": ">=v1.0-ALPHA1"
+        "doctrine/migrations": ">=v1.0-ALPHA1",
+        "imagine/imagine": ">=v0.4.1"
     },
     "autoload": {
         "psr-0": {

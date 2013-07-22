@@ -12,4 +12,9 @@ interface ImageResourceOptionsInterface
      * @return string
      */
     public function getImageEntityClass();
+
+    /**
+     * @return string
+     */
+    public function getImageHttpPath();
 }

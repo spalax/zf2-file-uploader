@@ -28,6 +28,13 @@ class Image implements ImageInterface
     private $alt = '';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="http_path", type="string", length=500, nullable=false)
+     */
+    private $httpPath = '';
+
+    /**
      * @var \Resource
      *
      * @ORM\OneToOne(targetEntity="Resource", inversedBy="image", fetch="EXTRA_LAZY")
@@ -68,6 +75,29 @@ class Image implements ImageInterface
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * Set http path
+     *
+     * @param string $path
+     * @return Image
+     */
+    public function setHttpPath($httpPath)
+    {
+        $this->httpPath = $httpPath;
+
+        return $this;
+    }
+
+    /**
+     * Get http path
+     *
+     * @return string
+     */
+    public function getHttpPath()
+    {
+        return $this->httpPath;
     }
 
     /**
