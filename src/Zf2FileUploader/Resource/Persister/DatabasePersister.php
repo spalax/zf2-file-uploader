@@ -2,6 +2,7 @@
 namespace Zf2FileUploader\Resource\Persister;
 
 use Doctrine\ORM\EntityManager;
+use Zend\EventManager\Event;
 use Zf2FileUploader\Entity\Resource;
 use Zf2FileUploader\Resource\Persister\PersisterInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
@@ -28,7 +29,8 @@ class DatabasePersister extends AbstractDatabasePersister
         $resourceEntity = clone $this->resourceEntity;
 
         $resourceEntity->setPath($resource->getPath());
-        $resourceEntity->setToken($resource->getId());
+        $resourceEntity->setToken($resource->getToken());
+
         $resourceEntity->setTemp(1);
 
         $this->entityManager->persist($resourceEntity);

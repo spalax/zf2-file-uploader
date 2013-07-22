@@ -29,7 +29,7 @@ class DatabaseRemover implements RemoverInterface
                 $entity = $resource;
             } else {
                 $entity = $this->entityManager->getRepository('Zf2FileUploader\Entity\Resource')
-                               ->findOneByToken($resource->getId());
+                               ->findOneByToken($resource->getToken());
 
                 if (is_null($entity)) {
                     return false;

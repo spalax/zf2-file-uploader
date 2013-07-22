@@ -18,7 +18,7 @@ class Resource implements ResourceInterface
     /**
      * @var string
      */
-    protected $id = '';
+    protected $token = '';
 
     /**
      * @var ResourceEntity | null
@@ -27,10 +27,12 @@ class Resource implements ResourceInterface
 
     /**
      * @param string $path
+     * @param string $ext
+     * @param null | string $token
      */
-    public function __construct($path, $ext, $id = null)
+    public function __construct($path, $ext, $token = null)
     {
-        $this->id = is_null($id) ? uniqid(md5($path)) : $id;
+        $this->token = is_null($token) ? uniqid(md5($path)) : $token;
         $this->ext = $ext;
         $this->path = $path;
     }
@@ -38,9 +40,19 @@ class Resource implements ResourceInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getToken()
     {
-        return $this->id;
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     * @return Resource
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
     }
 
     /**
@@ -49,16 +61,6 @@ class Resource implements ResourceInterface
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Resource
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

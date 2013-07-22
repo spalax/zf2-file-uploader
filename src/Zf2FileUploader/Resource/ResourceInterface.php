@@ -8,13 +8,13 @@ interface ResourceInterface extends ResourceRemovableInterface
     /**
      * @return mixed
      */
-    public function getId();
+    public function getToken();
 
     /**
-     * @param mixed $id
+     * @param mixed $token
      * @return ResourceInterface
      */
-    public function setId($id);
+    public function setToken($id);
 
     /**
      * @return string

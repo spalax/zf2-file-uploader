@@ -30,7 +30,7 @@ class DatabasePersister extends AbstractDatabasePersister
     {
         if (is_null($resourceEntity = $resource->getEntity()) ||
             is_null($resourceEntity = $this->entityManager->getRepository('Zf2FileUploader\Entity\Resource')
-                                           ->findOneByToken($resource->getId()))) {
+                                           ->findOneByToken($resource->getToken()))) {
             return null;
         }
 

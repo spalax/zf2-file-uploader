@@ -6,7 +6,7 @@ interface ResourceRemovableInterface
     /**
      * @return mixed
      */
-    public function getId();
+    public function getToken();
 
     /**
      * @return string

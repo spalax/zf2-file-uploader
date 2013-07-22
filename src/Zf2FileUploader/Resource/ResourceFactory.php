@@ -5,6 +5,7 @@ use Zf2Libs\Filter\File\ExtensionExtractor;
 
 class ResourceFactory implements ResourceFactoryInterface
 {
+
     /**
      * @param array $data
      * @return ResourceInterface[]

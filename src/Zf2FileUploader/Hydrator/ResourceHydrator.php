@@ -20,7 +20,7 @@ class ResourceHydrator implements HydratorInterface
             throw new InvalidArgumentException("Object has invalid type, must be type of ResourceInterface");
         }
 
-        return array('path' => $object->getPath(), 'id' => $object->getId());
+        return array('path' => $object->getPath(), 'token' => $object->getToken());
     }
 
     /**
@@ -42,8 +42,8 @@ class ResourceHydrator implements HydratorInterface
             $object->setPath($data['path']);
         }
 
-        if (array_key_exists('id', $data)) {
-            $object->setId($data['id']);
+        if (array_key_exists('token', $data)) {
+            $object->setToken($data['token']);
         }
 
         return $object;
