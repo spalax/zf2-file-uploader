@@ -17,26 +17,19 @@ class CreateController extends AbstractCreateController
     protected $saveService = null;
 
     /**
-     * @var ImageResourceOptionsInterface
-     */
-    protected $options;
-
-    /**
      * @param CreateImageResourceData $createResourceData
      * @param SaveService $saveService
      */
     public function __construct(CreateImageResourceData $createResourceData,
-                                SaveService $saveService,
-                                ImageResourceOptionsInterface $options)
+                                SaveService $saveService)
     {
         parent::__construct($createResourceData);
         $this->saveService = $saveService;
-        $this->options = $options;
     }
 
     public function onDispatch(MvcEvent $e)
     {
         $responses = $this->saveService->saveCollection($this->createResourceData->getResources());
-        $e->setResult(new ResponseUploaderModel($responses, $this->options));
+        $e->setResult(new ResponseUploaderModel($responses));
     }
 }
