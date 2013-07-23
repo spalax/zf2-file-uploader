@@ -86,7 +86,7 @@ return array(
         'preference' => array(
             'Zf2FileUploader\Options\TemporaryCleanerOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\Options\InputValidatorOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\Options\PersisterOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
+            'Zf2FileUploader\Options\ResourceOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\Options\ImageResourceOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
             'Zf2FileUploader\I18n\Translator\TranslatorInterface' => 'Zf2FileUploader\I18n\Translator\Translator',
             'Zend\EventManager\EventManagerInterface' => 'EventManager',

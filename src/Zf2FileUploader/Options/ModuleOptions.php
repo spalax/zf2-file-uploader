@@ -23,6 +23,11 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     protected $imageHttpPath = '';
 
     /**
+     * @var string
+     */
+    protected $resourceHttpPath = '';
+
+    /**
      * @var array
      */
     protected $thumbnailerThumbs = array();
@@ -45,7 +50,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     /**
      * @var string
      */
-    protected $persistentPath = '';
+    protected $resourcePersistentPath = '';
 
     /**
      * @var string
@@ -71,6 +76,22 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var int
      */
     protected $resizeHeight = 100;
+
+    /**
+     * @param string $resourceHttpPath
+     */
+    public function setResourceHttpPath($resourceHttpPath)
+    {
+        $this->resourceHttpPath = $resourceHttpPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResourceHttpPath()
+    {
+        return $this->resourceHttpPath;
+    }
 
     /**
      * @param string | array $thumbnailerThumbs
@@ -177,24 +198,24 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     }
 
     /**
-     * @param string $persistentPath
+     * @param string $resourcePersistentPath
      * @throws Exception\InvalidArgumentException
      */
-    public function setPersistentPath($persistentPath)
+    public function setResourcePersistentPath($resourcePersistentPath)
     {
-        $persistentPath = realpath($persistentPath);
-        if (!is_dir($persistentPath) || !is_writable($persistentPath)) {
-            throw new InvalidArgumentException("Persistent path $persistentPath is unreachable");
+        $resourcePersistentPath = realpath($resourcePersistentPath);
+        if (!is_dir($resourcePersistentPath) || !is_writable($resourcePersistentPath)) {
+            throw new InvalidArgumentException("Resource persistent path $resourcePersistentPath is unreachable");
         }
-        $this->persistentPath = $persistentPath;
+        $this->resourcePersistentPath = $resourcePersistentPath;
     }
 
     /**
      * @return string
      */
-    public function getPersistentPath()
+    public function getResourcePersistentPath()
     {
-        return $this->persistentPath;
+        return $this->resourcePersistentPath;
     }
 
     /**

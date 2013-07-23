@@ -6,7 +6,7 @@ use Zf2FileUploader\Options\Resource\Decorator;
 interface ModuleOptionsInterface extends TemporaryCleanerOptionsInterface,
                                          PreviewOptionsInterface,
                                          InputValidatorOptionsInterface,
-                                         PersisterOptionsInterface,
+                                         ResourceOptionsInterface,
                                          ImageResourceOptionsInterface,
                                          Decorator\ResizerOptionsInterface,
                                          Decorator\ThumbnailerOptionsInterface{}
