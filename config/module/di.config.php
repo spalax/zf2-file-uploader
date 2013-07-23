@@ -53,8 +53,7 @@ return array(
 
         'Zf2FileUploader\Resource\Persister\AggregatePersister' => array(
             'injections' => array(
-                'Zf2FileUploader\Resource\Persister\GenericPersisterStrategy',
-                'Zf2FileUploader\Resource\Persister\Image\ImagePersisterStrategy'
+                'Zf2FileUploader\Resource\Persister\GenericPersisterStrategy'
             )
         ),
 

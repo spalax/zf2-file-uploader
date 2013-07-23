@@ -3,9 +3,7 @@ namespace Zf2FileUploader\Controller\Images;
 
 use Zf2FileUploader\Controller\AbstractCreateController;
 use Zend\Mvc\MvcEvent;
-use Zf2FileUploader\InputData\CreateImageResourceData;
 use Zf2FileUploader\InputData\ResourceDataInterface;
-use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 use Zf2FileUploader\Service\Resource\SaveService;
 use Zf2FileUploader\View\Model\ResponseUploaderModel;
 
@@ -17,10 +15,10 @@ class CreateController extends AbstractCreateController
     protected $saveService = null;
 
     /**
-     * @param CreateImageResourceData $createResourceData
+     * @param ResourceDataInterface $createResourceData
      * @param SaveService $saveService
      */
-    public function __construct(CreateImageResourceData $createResourceData,
+    public function __construct(ResourceDataInterface $createResourceData,
                                 SaveService $saveService)
     {
         parent::__construct($createResourceData);
