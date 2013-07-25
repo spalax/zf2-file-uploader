@@ -4,6 +4,11 @@ namespace Zf2FileUploader\Resource;
 interface ResourceViewableInterface
 {
     /**
+     * @return mixed
+     */
+    public function getToken();
+
+    /**
      * @return string
      */
     public function getHttpPath();

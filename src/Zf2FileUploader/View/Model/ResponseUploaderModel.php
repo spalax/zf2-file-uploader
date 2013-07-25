@@ -39,7 +39,7 @@ class ResponseUploaderModel extends UploaderModel
     {
         $resources = $this->getVariable('resources', array());
 
-        $resources[] = $resource->getHttpPath();
+        $resources[$resource->getToken()] = $resource->getHttpPath();
 
         $this->setVariable('resources', $resources);
     }
