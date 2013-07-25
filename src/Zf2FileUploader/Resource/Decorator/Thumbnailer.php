@@ -23,7 +23,7 @@ class Thumbnailer implements DecoratorInterface
         if (is_string($options) && ($thumb = $this->getSizeFromThumb($options))) {
             $this->thumbnails[] = $thumb;
         } else if ($options instanceof ThumbnailerOptionsInterface) {
-             foreach ($options->setThumbnailerThumbs() as $thumb) {
+             foreach ($options->getThumbnailerThumbs() as $thumb) {
                  $this->thumbnails[] = $this->getSizeFromThumb($thumb);
              }
         } else {
