@@ -58,17 +58,17 @@ class Thumbnailer implements DecoratorInterface
         $mode = ImagineImageInterface::THUMBNAIL_OUTBOUND;
 
         $pathInfo = pathinfo($resource->getPath());
-        $ext = $pathInfo[PATHINFO_EXTENSION];
-        $baseName = $pathInfo[PATHINFO_BASENAME];
-        $dirName = $pathInfo[PATHINFO_DIRNAME];
 
+        $ext = $pathInfo['extension'];
+        $dirName = $pathInfo['dirname'];
 
         foreach ($this->thumbnails as $thumbnail) {
             $sizeBox = new Box($thumbnail['width'], $thumbnail['height']);
 
             if (!is_null($sizeBox)) {
                 $image->thumbnail($sizeBox, $mode)
-                      ->save(sprintf('%s/%s_%sx%s.%s',$dirName,$baseName,
+                      ->save(sprintf('%s/%s_%sx%s.%s',$dirName,
+                                                      rtrim($pathInfo['basename'], '.'.$ext),
                                                       $thumbnail['width'],
                                                       $thumbnail['height'], $ext),
                              array('format'=>$resource->getExt()));
