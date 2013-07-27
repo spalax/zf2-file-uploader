@@ -4,15 +4,24 @@ namespace Zf2FileUploader\InputData;
 
 use Zend\InputFilter\FileInput;
 use Zend\Validator\File\MimeType;
-use Zf2FileUploader\Resource\ResourceFactoryInterface;
+use Zf2FileUploader\Resource\AbstractResourceFactoryInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 
-class CreateImageResourceData extends AbstractResourceData
+class CreateImageResourceData extends AbstractResourceData implements ImageResourceDataInterface
 {
-    public function __construct(ResourceFactoryInterface $resourceFactory, $fileInputName = 'resource')
+    /**
+     * @var AbstractResourceFactoryInterface
+     */
+    protected $abstractResourceFactory;
+
+    /**
+     * @param AbstractResourceFactoryInterface $resourceFactory
+     * @param string $fileInputName
+     */
+    public function __construct(AbstractResourceFactoryInterface $resourceFactory, $fileInputName = 'resource')
     {
         $fileInput = new FileInput($fileInputName);
         $fileInput->setRequired(true);
-
 
         $fileInput->getValidatorChain()
                   ->attach(new MimeType(array('image/jpeg',
@@ -20,7 +29,23 @@ class CreateImageResourceData extends AbstractResourceData
                                               'image/gif')));
 
         $this->add($fileInput);
+        $this->abstractResourceFactory = $resourceFactory;
+    }
 
-        parent::__construct($resourceFactory);
+    /**
+     * @param array $data
+     * @return ImageResourceInterface[]
+     */
+    protected function createResource(array $data)
+    {
+        return $this->abstractResourceFactory->createImageResource($data);
+    }
+
+    /**
+     * @return ImageResourceInterface[]
+     */
+    public function getResources()
+    {
+        return $this->createResources();
     }
 }

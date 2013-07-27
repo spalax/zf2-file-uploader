@@ -1,9 +1,7 @@
 <?php
 namespace Zf2FileUploader\Service\Resource\Response;
 
-use Zf2FileUploader\Resource\ResourceInterface;
-
-class Response implements ResponseInterface
+abstract class AbstractResponse implements ResponseInterface
 {
     /**
      * @var array
@@ -16,22 +14,13 @@ class Response implements ResponseInterface
     protected $failed = false;
 
     /**
-     * @var ResourceInterface
-     */
-    protected $resource;
-
-    public function __construct(ResourceInterface $resource)
-    {
-        $this->resource = $resource;
-    }
-
-    /**
      * @param string $message
      * @return ResponseInterface
      */
     public function addMessage($message)
     {
         $this->messages[] = $message;
+        return $this;
     }
 
     /**
@@ -40,14 +29,6 @@ class Response implements ResponseInterface
     public function getMessages()
     {
         return $this->messages;
-    }
-
-    /**
-     * @return ResourceInterface
-     */
-    public function getResource()
-    {
-       return $this->resource;
     }
 
     /**

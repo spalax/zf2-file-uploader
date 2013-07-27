@@ -14,8 +14,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Http\Request as HttpRequest;
 use Zf2FileUploader\View\Model;
 use Zf2FileUploader\View\Renderer\UploaderRenderer;
-use Zend\Tag\Cloud\Decorator\HtmlTag;
-use Zend\View\Helper\Layout;
 use Zend\View\ViewEvent;
 
 class UploaderStrategy extends AbstractListenerAggregate
@@ -95,7 +93,7 @@ class UploaderStrategy extends AbstractListenerAggregate
         $model = $e->getModel();
 
         if (!$model instanceof Model\UploaderModel) {
-            return;
+            return null;
         }
         // JsonModel found
         return $this->renderer;

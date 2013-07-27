@@ -1,17 +1,17 @@
 <?php
-namespace Zf2FileUploader\Service\Resource;
+namespace Zf2FileUploader\Service\Resource\Image;
 
 use Zf2FileUploader\I18n\Translator\TranslatorInterface;
-use Zf2FileUploader\Resource\Persister\PersisterInterface;
-use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
+use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
 use Zf2FileUploader\Service\Cleaner\CleanerStrategyInterface;
-use Zf2FileUploader\Service\Resource\Response\Response;
-use Zf2FileUploader\Service\Resource\Response\ResponseInterface;
+use Zf2FileUploader\Service\Resource\Response\ImageResponse;
+use Zf2FileUploader\Service\Resource\Response\ImageResponseInterface;
 
-class SaveService
+class SaveService implements SaveServiceInterface
 {
     /**
-     * @var PersisterInterface
+     * @var ImagePersisterInterface
      */
     protected $persister;
 
@@ -43,12 +43,13 @@ class SaveService
     );
 
     /**
-     * @param PersisterInterface $persister
-     * @param DecorateService $decorateService
+     * @param ImagePersisterInterface $persister
+     * @param DecorateServiceInterface $decorateService
+     * @param CleanerStrategyInterface $cleaner
      * @param TranslatorInterface $translator
      */
-    public function __construct(PersisterInterface $persister,
-                                DecorateService $decorateService = null,
+    public function __construct(ImagePersisterInterface $persister,
+                                DecorateServiceInterface $decorateService = null,
                                 CleanerStrategyInterface $cleaner,
                                 TranslatorInterface $translator)
     {
@@ -59,21 +60,20 @@ class SaveService
     }
 
     /**
-     * @param ResourceInterface $resource
-     * @param ResponseInterface $response
-     * @return Response|ResponseInterface
+     * @param ImageResourceInterface $resource
+     * @param ImageResponseInterface $response
+     * @return ImageResponseInterface
      * @throws \Exception
      */
-    public function save(ResourceInterface $resource, ResponseInterface $response = null)
+    public function save(ImageResourceInterface $resource, ImageResponseInterface $response = null)
     {
         if (is_null($response)) {
-            $response = new Response($resource);
+            $response = new ImageResponse($resource);
         }
 
         $this->cleaner->clean();
 
         try {
-
             if (!$this->persister->persist($resource)) {
                 $message = $this->translator->translate($this->translateMessages[self::MESSAGE_COULD_NOT_PERSIST]);
                 $response->addMessage(sprintf($message, $resource->getPath()));
@@ -103,8 +103,8 @@ class SaveService
     }
 
     /**
-     * @param ResourceInterface[] $resources
-     * @return ResponseInterface[]
+     * @param ImageResourceInterface[] $resources
+     * @return ImageResourceInterface[]
      */
     public function saveCollection(array $resources)
     {

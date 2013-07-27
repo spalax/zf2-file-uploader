@@ -3,11 +3,8 @@ namespace Zf2FileUploader;
 
 use Zf2FileUploader\Options\ModuleOptions;
 use Zend\Di\Di;
-use Zend\InputFilter\InputFilterPluginManager;
-use Zend\ModuleManager\Feature\InputFilterProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
-use Zend\ServiceManager\Di\DiInstanceManagerProxy;
 
 class Module
 {

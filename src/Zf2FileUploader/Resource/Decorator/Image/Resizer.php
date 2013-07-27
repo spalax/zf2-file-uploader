@@ -1,14 +1,15 @@
 <?php
-namespace Zf2FileUploader\Resource\Decorator;
+namespace Zf2FileUploader\Resource\Decorator\Image;
 
 use Zf2FileUploader\Options\Resource\Decorator\ResizerOptionsInterface;
-use Zf2FileUploader\Resource\ResourceInterface;
 use Zf2FileUploader\Resource\Decorator\Exception\DomainException;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface as ImagineImageInterface;
 use Imagine\Gd\Imagine;
+use Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 
-class Resizer implements DecoratorInterface
+class Resizer implements ImageDecoratorInterface
 {
     /**
      * @var int
@@ -34,10 +35,19 @@ class Resizer implements DecoratorInterface
     }
 
     /**
-     * @param DecoratorInterface $resource
+     * @param ImageResourceInterface $resource
+     * @return string
+     */
+    protected function getSavePath(ImageResourceInterface $resource)
+    {
+        return $resource->getPath();
+    }
+
+    /**
+     * @param ImageResourceInterface $resource
      * @return boolean
      */
-    public function decorate(ResourceInterface $resource)
+    public function decorate(ImageResourceInterface $resource)
     {
         $imagine = new Imagine();
 
@@ -50,7 +60,10 @@ class Resizer implements DecoratorInterface
 
         if (!is_null($sizeBox)) {
             $image->thumbnail($sizeBox, $mode)
-                  ->save($resource->getPath(), array('format'=>$resource->getExt()));
+                  ->save($this->getSavePath($resource),
+                         array('format'=>$resource->getExt()));
+        } else {
+            return false;
         }
 
         return true;

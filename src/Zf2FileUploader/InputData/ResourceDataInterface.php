@@ -1,16 +1,11 @@
 <?php
 namespace Zf2FileUploader\InputData;
 
-use Zf2FileUploader\Resource\ResourceInterface;
 use Zf2FileUploader\InputData\Exception\InvalidArgumentException;
+use Zf2FileUploader\MessagesInterface;
 
-interface ResourceDataInterface
+interface ResourceDataInterface extends MessagesInterface
 {
-    /**
-     * @return ResourceInterface[]
-     */
-    public function getResources();
-
     /**
      * @param  array | \Traversable $data
      * @throws InvalidArgumentException

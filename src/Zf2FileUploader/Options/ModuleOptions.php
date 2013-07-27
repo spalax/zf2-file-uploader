@@ -95,6 +95,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
 
     /**
      * @param string | array $thumbnailerThumbs
+     * @throws DomainException
      */
     public function setThumbnailerThumbs($thumbnailerThumbs)
     {
@@ -220,6 +221,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
 
     /**
      * @param string $imagePersistentPath
+     * @throws InvalidArgumentException
      */
     public function setImagePersistentPath($imagePersistentPath)
     {

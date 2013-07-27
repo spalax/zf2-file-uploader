@@ -14,7 +14,7 @@ class Image implements ImageInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -35,14 +35,32 @@ class Image implements ImageInterface
     private $httpPath = '';
 
     /**
-     * @var \Resource
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="Resource", inversedBy="image", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="resource_id", referencedColumnName="id", onDelete="CASCADE")
-     * })
+     * @ORM\Column(name="path", type="string", length=250, nullable=false)
      */
-    private $resource;
+    private $path;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=50, nullable=false)
+     */
+    private $token;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="temporary", type="boolean", nullable=false, options={"unsigned"=true})
+     */
+    private $temporary = 1;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
+     */
+    private $createdTimestamp;
 
     /**
      * Get id
@@ -80,13 +98,12 @@ class Image implements ImageInterface
     /**
      * Set http path
      *
-     * @param string $path
+     * @param string $httpPath
      * @return Image
      */
     public function setHttpPath($httpPath)
     {
         $this->httpPath = $httpPath;
-
         return $this;
     }
 
@@ -101,25 +118,94 @@ class Image implements ImageInterface
     }
 
     /**
-     * Set resource
+     * Set temporary
      *
-     * @param \Zf2FileUploader\Entity\Resource $resource
+     * @param boolean $temporary
      * @return Image
      */
-    public function setResource(\Zf2FileUploader\Entity\Resource $resource = null)
+    public function setTemporary($temporary)
     {
-        $this->resource = $resource;
+        $this->temporary = $temporary;
 
         return $this;
     }
 
     /**
-     * Get resource
+     * Get temporary
      *
-     * @return \Zf2FileUploader\Entity\Resource
+     * @return boolean
      */
-    public function getResource()
+    public function getTemporary()
     {
-        return $this->resource;
+        return $this->temporary;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Image
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Image
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set createdTimestamp
+     *
+     * @param \DateTime $createdTimestamp
+     * @return Image
+     */
+    public function setCreatedTimestamp($createdTimestamp)
+    {
+        $this->createdTimestamp = $createdTimestamp;
+
+        return $this;
+    }
+
+    /**
+     * Get createdTimestamp
+     *
+     * @return \DateTime
+     */
+    public function getCreatedTimestamp()
+    {
+        return $this->createdTimestamp;
     }
 }

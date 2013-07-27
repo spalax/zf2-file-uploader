@@ -15,22 +15,14 @@ abstract class AbstractCreateController extends AbstractController
     const EVENT_INVALID_DATA_POST_HANDLER = 'uploader.create.invalid.data.postDecorator';
 
     /**
-     * @var ResourceDataInterface
-     */
-    protected $createResourceData;
-
-    /**
      * @var boolean
      */
     protected $disableDefaultErrorHandler = false;
 
     /**
-     * @param ResourceDataInterface $createResourceData
+     * @return ResourceDataInterface
      */
-    public function __construct(ResourceDataInterface $createResourceData)
-    {
-        $this->createResourceData = $createResourceData;
-    }
+    abstract protected function getDataResourceCreator();
 
     /**
      * @param bool $flag
@@ -53,13 +45,14 @@ abstract class AbstractCreateController extends AbstractController
     public function dispatch(Request $request, Response $response = null)
     {
         $this->request = $request;
-        $this->createResourceData->setData(array_merge_recursive($this->params()->fromPost(),
-                                                                 $request->getFiles()->toArray()));
+        $this->getDataResourceCreator()->setData(array_merge_recursive($this->params()->fromPost(),
+                                                                       $request->getFiles()->toArray()));
 
-        if (!$this->createResourceData->isValid()) {
+
+        if (!$this->getDataResourceCreator()->isValid()) {
             $this->getEventManager()->trigger(self::EVENT_INVALID_DATA_PRE_HANDLER,
                                               $this,
-                                              array($this->createResourceData));
+                                              array($this->getDataResourceCreator()));
 
             if ($this->disableDefaultErrorHandler) {
                 $response = $response ?: new HttpResponse();
@@ -68,9 +61,9 @@ abstract class AbstractCreateController extends AbstractController
                 $response->setStatusCode(400);
             } else {
                 $this->getEventManager()->clearListeners(MvcEvent::EVENT_DISPATCH);
-                $this->getEvent()->setResult(new FailedUploaderModel($this->createResourceData));
+                $this->getEvent()->setResult(new FailedUploaderModel($this->getDataResourceCreator()));
             }
-
+            
             $this->getEventManager()->trigger(self::EVENT_INVALID_DATA_POST_HANDLER, $this);
         }
 

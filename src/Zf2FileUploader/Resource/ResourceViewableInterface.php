@@ -15,7 +15,8 @@ interface ResourceViewableInterface
 
     /**
      * @param string $httpPath
-     * @return string
+     * @param string $httpPath
+     * @return ResourceViewableInterface
      */
     public function setHttpPath($httpPath);
 }

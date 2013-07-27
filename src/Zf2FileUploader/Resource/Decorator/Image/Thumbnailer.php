@@ -1,14 +1,15 @@
 <?php
-namespace Zf2FileUploader\Resource\Decorator;
+namespace Zf2FileUploader\Resource\Decorator\Image;
 
 use Zf2FileUploader\Options\Resource\Decorator\ThumbnailerOptionsInterface;
-use Zf2FileUploader\Resource\ResourceInterface;
 use Zf2FileUploader\Resource\Decorator\Exception\DomainException;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface as ImagineImageInterface;
 use Imagine\Gd\Imagine;
+use Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 
-class Thumbnailer implements DecoratorInterface
+class Thumbnailer implements ImageDecoratorInterface
 {
     /**
      * @var array
@@ -17,6 +18,7 @@ class Thumbnailer implements DecoratorInterface
 
     /**
      * @param string | ThumbnailerOptionsInterface $options
+     * @throws DomainException
      */
     public function __construct($options)
     {
@@ -46,10 +48,10 @@ class Thumbnailer implements DecoratorInterface
     }
 
     /**
-     * @param DecoratorInterface $resource
+     * @param ImageResourceInterface $resource
      * @return boolean
      */
-    public function decorate(ResourceInterface $resource)
+    public function decorate(ImageResourceInterface $resource)
     {
         $imagine = new Imagine();
         $image = $imagine->open($resource->getPath());

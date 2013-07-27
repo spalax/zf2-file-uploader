@@ -24,6 +24,7 @@ class ListController extends AbstractController
 
     /**
      * @param EntityManager $entityManager
+     * @param ImageResourceOptionsInterface $options
      */
     public function __construct(EntityManager $entityManager, ImageResourceOptionsInterface $options)
     {
@@ -31,8 +32,9 @@ class ListController extends AbstractController
         $this->options = $options;
     }
 
-    /* (non-PHPdoc)
-     * @see Zend\Mvc\Controller.AbstractActionController::onDispatch()
+    /**
+     * @param MvcEvent $e
+     * @return mixed|void
      */
     public function onDispatch(MvcEvent $e)
     {

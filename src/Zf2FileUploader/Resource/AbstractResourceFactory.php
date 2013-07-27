@@ -3,18 +3,17 @@ namespace Zf2FileUploader\Resource;
 
 use Zf2Libs\Filter\File\ExtensionExtractor;
 
-class ResourceFactory implements ResourceFactoryInterface
+class AbstractResourceFactory implements AbstractResourceFactoryInterface
 {
-
     /**
      * @param array $data
-     * @return ResourceInterface[]
+     * @return ImageResourceInterface[]
      */
-    public function createResource($data)
+    public function createImageResource($data)
     {
         $filter = new ExtensionExtractor();
         $ext = $filter->filter($data['tmp_name']);
 
-        return new Resource($data['tmp_name'], $ext);
+        return new ImageResource($data['tmp_name'], $ext);
     }
 }

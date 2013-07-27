@@ -18,11 +18,6 @@ interface ResponseInterface extends MessagesInterface
     public function getMessages();
 
     /**
-     * @return ResourceInterface
-     */
-    public function getResource();
-
-    /**
      * @return boolean
      */
     public function isSuccess();
@@ -31,4 +26,9 @@ interface ResponseInterface extends MessagesInterface
      * @return ResponseInterface
      */
     public function fail();
+
+    /**
+     * @return ResourceInterface
+     */
+    public function getResource();
 }

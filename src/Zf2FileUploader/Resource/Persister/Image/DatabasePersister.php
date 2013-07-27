@@ -3,67 +3,44 @@ namespace Zf2FileUploader\Resource\Persister\Image;
 
 use Doctrine\ORM\EntityManager;
 use Zf2FileUploader\Entity\ImageInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2FileUploader\Resource\Persister\AbstractDatabasePersister;
-use Zf2FileUploader\Resource\ResourceInterface;
-use Zf2FileUploader\Resource\Resource;
-use Zf2FileUploader\Entity\Resource as ResourceEntity;
+use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
 
-class DatabasePersister extends AbstractDatabasePersister
+class DatabasePersister extends AbstractDatabasePersister implements ImagePersisterInterface
 {
     /**
      * @var ImageInterface
      */
-    protected $imageEntity;
+    protected $imageResourceEntity;
 
     public function __construct(EntityManager $entityManager,
-                                ImageInterface $imageEntity)
+                                ImageInterface $imageResourceEntity)
     {
         parent::__construct($entityManager);
-        $this->imageEntity = $imageEntity;
+        $this->imageResourceEntity = $imageResourceEntity;
     }
 
     /**
-     * @param Resource $resource
-     * @return ResourceEntity | null
-     */
-    protected function getResourceEntity(Resource $resource)
-    {
-        if (is_null($resourceEntity = $resource->getEntity()) ||
-            is_null($resourceEntity = $this->entityManager->getRepository('Zf2FileUploader\Entity\Resource')
-                                           ->findOneByToken($resource->getToken()))) {
-            return null;
-        }
-
-        $resource->setEntity($resourceEntity);
-        return $resourceEntity;
-    }
-
-    /**
-     * @param ResourceInterface $resource
+     * @param ImageResourceInterface $resource
      * @return boolean
      */
-    protected function run(ResourceInterface $resource)
+    public function persist(ImageResourceInterface $resource)
     {
-        if (is_null($resourceEntity = $this->getResourceEntity($resource))) {
-            return false;
-        }
+        $imageResourceEntity = clone $this->imageResourceEntity;
 
-        $imageEntity = clone $this->imageEntity;
+        $imageResourceEntity->setPath($resource->getPath());
+        $imageResourceEntity->setHttpPath($resource->getHttpPath());
+        $imageResourceEntity->setToken($resource->getToken());
 
-        $imageEntity->setResource($resourceEntity);
+        $imageResourceEntity->setTemporary(1);
 
-        if (strlen(trim($resource->getHttpPath())) < 1) {
-            return false;
-        }
+        $this->entityManager->beginTransaction();
 
-        $imageEntity->setHttpPath($resource->getHttpPath());
-        $resourceEntity->setTemp(0);
+        $this->entityManager->persist($imageResourceEntity);
+        $this->entityManager->flush($imageResourceEntity);
 
-        $this->entityManager->persist($resourceEntity);
-        $this->entityManager->persist($imageEntity);
-
-        $this->entityManager->flush($resourceEntity);
-        $this->entityManager->flush($imageEntity);
+        $resource->setEntity($imageResourceEntity);
 
         return true;
     }

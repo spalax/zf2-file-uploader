@@ -42,7 +42,7 @@ class UploaderRenderer implements Renderer, TreeRendererInterface
      * @param ModelInterface $model
      * @param null $values
      * @return string
-     * @throws Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function render($model, $values = null)
     {
@@ -68,7 +68,7 @@ class UploaderRenderer implements Renderer, TreeRendererInterface
      *
      * No.
      *
-     * @return false
+     * @return boolean
      */
     public function canRenderTrees()
     {

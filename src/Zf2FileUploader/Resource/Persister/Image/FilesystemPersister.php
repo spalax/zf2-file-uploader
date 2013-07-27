@@ -3,15 +3,21 @@ namespace Zf2FileUploader\Resource\Persister\Image;
 
 use Zend\Filter\File\Rename;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2FileUploader\Resource\Persister\AbstractFilesystemPersister;
-use Zf2FileUploader\Resource\ResourceInterface;
+use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
 
-class FilesystemPersister extends AbstractFilesystemPersister
+class FilesystemPersister extends AbstractFilesystemPersister implements ImagePersisterInterface
 {
     /**
      * @var ImageResourceOptionsInterface
      */
     protected $options;
+
+    /**
+     * @var \Callable
+     */
+    protected $revertClb = null;
 
     public function __construct(ImageResourceOptionsInterface $options)
     {
@@ -19,10 +25,10 @@ class FilesystemPersister extends AbstractFilesystemPersister
     }
 
     /**
-     * @param ResourceInterface $resource
+     * @param ImageResourceInterface $resource
      * @return boolean
      */
-    public function persist(ResourceInterface $resource)
+    public function persist(ImageResourceInterface $resource)
     {
         $ext = $resource->getExt();
         $baseName = uniqid().($ext ? '.'.$ext : '');
@@ -34,26 +40,15 @@ class FilesystemPersister extends AbstractFilesystemPersister
             'randomize'            => false,
         ));
 
-        $oldPath = $resource->getPath();
-        $oldHttpPath = $resource->getHttpPath();
-
         $moveUploadedFilter->filter($resource->getPath());
 
         $resource->setPath($target);
         $resource->setHttpPath($this->options->getImageHttpPath().'/'.$baseName);
 
-        $this->setCallbacks(null, function () use ($resource, $target, $oldPath, $oldHttpPath) {
+        $this->setCallbacks(null, function () use ($target) {
             if (file_exists($target)) {
-                $moveUploadedFilter = new Rename(array(
-                    'target'               => $oldPath,
-                    'overwrite'            => false,
-                    'randomize'            => false,
-                ));
-                $moveUploadedFilter->filter($target);
+                unlink($target);
             }
-
-            $resource->setPath($oldPath);
-            $resource->setHttpPath($oldHttpPath);
         });
 
         return file_exists($target);

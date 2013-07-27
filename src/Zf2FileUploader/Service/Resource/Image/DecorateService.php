@@ -1,17 +1,16 @@
 <?php
-namespace Zf2FileUploader\Service\Resource;
+namespace Zf2FileUploader\Service\Resource\Image;
 
-use Zend\I18n\Translator\Translator;
 use Zf2FileUploader\I18n\Translator\TranslatorInterface;
-use Zf2FileUploader\Resource\Decorator\DecoratorInterface;
-use Zf2FileUploader\Resource\ResourceInterface;
-use Zf2FileUploader\Service\Resource\Response\Response;
-use Zf2FileUploader\Service\Resource\Response\ResponseInterface;
+use Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\ImageResourceInterface;
+use Zf2FileUploader\Service\Resource\Response\ImageResponse;
+use Zf2FileUploader\Service\Resource\Response\ImageResponseInterface;
 
-class DecorateService
+class DecorateService implements DecorateServiceInterface
 {
     /**
-     * @var DecoratorInterface
+     * @var ImageDecoratorInterface
      */
     protected $decorator;
 
@@ -32,10 +31,10 @@ class DecorateService
     );
 
     /**
-     * @param DecoratorInterface $decorator
+     * @param ImageDecoratorInterface $decorator
      * @param TranslatorInterface $translator
      */
-    public function __construct(DecoratorInterface $decorator,
+    public function __construct(ImageDecoratorInterface $decorator,
                                 TranslatorInterface $translator)
     {
         $this->decorator = $decorator;
@@ -43,19 +42,19 @@ class DecorateService
     }
 
     /**
-     * @param ResourceInterface $resource
-     * @param ResponseInterface $response
-     * @return ResponseInterface
+     * @param ImageResourceInterface $resource
+     * @param ImageResponseInterface $response
+     * @return ImageResponseInterface
      */
-    public function decorate(ResourceInterface $resource, ResponseInterface $response = null)
+    public function decorate(ImageResourceInterface $resource, ImageResponseInterface $response = null)
     {
         if (is_null($response)) {
-            $response = new Response($resource);
+            $response = new ImageResponse($resource);
         }
 
         try {
             if (!$this->decorator->decorate($resource)) {
-                $message = $this->translator->translate($this->translateMessages[self::MESSAGE_COULD_NOT_HANDLE]);
+                $message = $this->translator->translate($this->translateMessages[self::MESSAGE_COULD_NOT_DECORATE]);
                 $response->addMessage(sprintf($message, $resource->getPath()));
                 $response->fail();
                 return $response;
@@ -71,8 +70,8 @@ class DecorateService
     }
 
     /**
-     * @param ResourceInterface[] $resources
-     * @return ResponseInterface[]
+     * @param ImageResourceInterface[] $resources
+     * @return ImageResourceInterface[]
      */
     public function decorateCollection(array $resources)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace Zf2FileUploader\Entity;
 
-interface ImageInterface
+interface ImageInterface extends ResourceInterface
 {
     /**
      * @return int
@@ -18,12 +18,6 @@ interface ImageInterface
      * @return ImageInterface
      */
     public function setAlt($alt);
-
-    /**
-     * @param Resource $resource
-     * @return ImageInterface
-     */
-    public function setResource(Resource $resource);
 
     /**
      * @param string $httpPath

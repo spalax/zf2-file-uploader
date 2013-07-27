@@ -1,9 +1,7 @@
 <?php
 namespace Zf2FileUploader\Resource;
 
-use Zf2FileUploader\Entity\Resource as ResourceEntity;
-
-interface ResourceInterface extends ResourceRemovableInterface, ResourceViewableInterface
+interface ResourceInterface extends ResourceRemovableInterface
 {
     /**
      * @return mixed
@@ -14,7 +12,7 @@ interface ResourceInterface extends ResourceRemovableInterface, ResourceViewable
      * @param mixed $token
      * @return ResourceInterface
      */
-    public function setToken($id);
+    public function setToken($token);
 
     /**
      * @return string
@@ -37,15 +35,4 @@ interface ResourceInterface extends ResourceRemovableInterface, ResourceViewable
      * @return ResourceInterface
      */
     public function setExt($ext);
-
-    /**
-     * @return Resource
-     */
-    public function getEntity();
-
-    /**
-     * @param ResourceEntity $resourceEntity
-     * @return ResourceInterface
-     */
-    public function setEntity(ResourceEntity $resourceEntity);
 }

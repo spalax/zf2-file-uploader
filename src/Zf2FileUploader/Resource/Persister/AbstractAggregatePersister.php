@@ -1,41 +1,16 @@
 <?php
 namespace Zf2FileUploader\Resource\Persister;
 
-use Zf2FileUploader\Resource\ResourceInterface;
-
 abstract class AbstractAggregatePersister implements PersisterInterface
 {
     /**
-     * @var PersisterInterface[]
+     * @return PersisterInterface[]
      */
-    protected $persisters = array();
-
-    /**
-     * @var PersisterInterface[]
-     */
-    protected $persisted = array();
-
-    /**
-     * @param PersisterInterface $resource
-     * @return boolean
-     */
-    public function persist(ResourceInterface $resource)
-    {
-        $this->persisted = array();
-
-        foreach ($this->persisters as $persister) {
-            $result = $persister->persist($resource);
-            $this->persisted[] = $persister;
-            if (!$result) {
-                return false;
-            }
-        }
-        return true;
-    }
+    abstract protected function getPersisted();
 
     public function commit()
     {
-        foreach ($this->persisted as $persister) {
+        foreach ($this->getPersisted() as $persister) {
             if (!$persister->commit()) {
                 return false;
             }
@@ -45,7 +20,8 @@ abstract class AbstractAggregatePersister implements PersisterInterface
 
     public function rollback()
     {
-        foreach (array_reverse($this->persisted) as $persister) {
+        /* @var $persister PersisterInterface */
+        foreach (array_reverse($this->getPersisted()) as $persister) {
             $persister->rollback();
         }
     }

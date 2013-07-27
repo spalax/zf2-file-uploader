@@ -1,19 +1,12 @@
 <?php
 namespace Zf2FileUploader\Resource;
 
-use Zf2FileUploader\Entity\Resource as ResourceEntity;
-
-class Resource implements ResourceInterface
+abstract class AbstractResource implements ResourceInterface
 {
     /**
      * @var string
      */
     protected $path = '';
-
-    /**
-     * @var string
-     */
-    protected $httpPath = '';
 
     /**
      * @var string
@@ -26,36 +19,16 @@ class Resource implements ResourceInterface
     protected $token = '';
 
     /**
-     * @var ResourceEntity | null
-     */
-    protected $resourceEntity = null;
-
-    /**
      * @param string $path
      * @param string $ext
-     * @param null | string $token
+     * @param null $token
+     * @return \Zf2FileUploader\Resource\AbstractResource
      */
     public function __construct($path, $ext, $token = null)
     {
         $this->token = is_null($token) ? uniqid(md5($path)) : $token;
         $this->ext = $ext;
         $this->path = $path;
-    }
-
-    /**
-     * @param string $httpPath
-     */
-    public function setHttpPath($httpPath)
-    {
-        $this->httpPath = $httpPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHttpPath()
-    {
-        return $this->httpPath;
     }
 
     /**
@@ -110,23 +83,5 @@ class Resource implements ResourceInterface
     public function getExt()
     {
         return $this->ext;
-    }
-
-    /**
-     * @return ResourceEntity
-     */
-    public function getEntity()
-    {
-        return $this->resourceEntity;
-    }
-
-    /**
-     * @param ResourceEntity $entity
-     * @return Resource
-     */
-    public function setEntity(ResourceEntity $entity)
-    {
-        $this->resourceEntity = $entity;
-        return $this;
     }
 }

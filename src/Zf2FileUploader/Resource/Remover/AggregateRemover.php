@@ -1,7 +1,7 @@
 <?php
 namespace Zf2FileUploader\Resource\Remover;
 
-use Zf2FileUploader\Resource\ResourceRemovableInterface;
+use Zf2FileUploader\Entity\ResourceInterface;
 
 class AggregateRemover implements RemoverInterface
 {
@@ -34,10 +34,10 @@ class AggregateRemover implements RemoverInterface
     }
 
     /**
-     * @param ResourceRemovableInterface $resource
+     * @param ResourceInterface $resource
      * @return boolean
      */
-    public function remove(ResourceRemovableInterface $resource)
+    public function remove(ResourceInterface $resource)
     {
         $return = false;
         foreach ($this->removers as $remover) {

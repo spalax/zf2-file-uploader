@@ -2,9 +2,9 @@
 return array(
     'definition' => array(
         'class' => array(
-            'Zf2FileUploader\Resource\Persister\AggregatePersister' => array(
+            'Zf2FileUploader\Resource\Persister\Image\AggregatePersister' => array(
                 'addPersister' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Persister\PersisterInterface',
+                    array('type' => 'Zf2FileUploader\Resource\Persister\ImagePersisterInterface',
                           'required' => true)
                 )
             ),
@@ -16,9 +16,9 @@ return array(
                 )
             ),
 
-            'Zf2FileUploader\Resource\Decorator\AggregateDecorator' => array(
+            'Zf2FileUploader\Resource\Decorator\Image\AggregateDecorator' => array(
                 'addDecorator' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Decorator\DecoratorInterface',
+                    array('type' => 'Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface',
                           'required' => true)
                 )
             )
@@ -33,27 +33,16 @@ return array(
 
     'instance' => array(
 
-        'Zf2FileUploader\Service\Cleaner\ResourceTemporaryCleaner' => array(
+        'Zf2FileUploader\Service\Cleaner\ImageTemporaryCleaner' => array(
             'parameters'=> array(
                 'remover' => 'Zf2FileUploader\Resource\Remover\AggregateRemover'
             )
         ),
 
-        'Zf2FileUploader\InputData\CreateImageResourceData' => array(
-            'parameters' => array(
-                'resourceFactory' => 'Zf2FileUploader\Resource\ResourceFactory'
-            )
-        ),
-
-        'Zf2FileUploader\Controller\Images\CreateController' => array(
-            'parameters' => array(
-                'createResourceData' => 'Zf2FileUploader\InputData\CreateImageResourceData'
-            )
-        ),
-
-        'Zf2FileUploader\Resource\Persister\AggregatePersister' => array(
+        'Zf2FileUploader\Resource\Persister\Image\AggregatePersister' => array(
             'injections' => array(
-                'Zf2FileUploader\Resource\Persister\GenericPersisterStrategy'
+                'Zf2FileUploader\Resource\Persister\Image\FilesystemPersister',
+                'Zf2FileUploader\Resource\Persister\Image\DatabasePersister'
             )
         ),
 
@@ -70,27 +59,19 @@ return array(
             )
         ),
 
-        'Zf2FileUploader\Service\Resource\SaveService' => array(
+        'Zf2FileUploader\Service\Resource\Image\SaveService' => array(
             'parameters' => array(
-                'persister' => 'Zf2FileUploader\Resource\Persister\AggregatePersister',
-                'cleaner' => 'Zf2FileUploader\Service\Cleaner\ResourceTemporaryCleaner'
+                'persister' => 'Zf2FileUploader\Resource\Persister\Image\AggregatePersister',
+                'cleaner' => 'Zf2FileUploader\Service\Cleaner\ImageTemporaryCleaner'
             )
         ),
 
-        'Zf2FileUploader\Service\Resource\DecorateService' => array(
+        'Zf2FileUploader\Service\Resource\Image\DecorateService' => array(
             'parameters' => array(
-                'decorator' => 'Zf2FileUploader\Resource\Decorator\AggregateDecorator'
+                'decorator' => 'Zf2FileUploader\Resource\Decorator\Image\AggregateDecorator'
             )
         ),
 
-        'preference' => array(
-            'Zf2FileUploader\Options\TemporaryCleanerOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\Options\InputValidatorOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\Options\ResourceOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\Options\ImageResourceOptionsInterface' => 'Zf2FileUploader\Options\ModuleOptions',
-            'Zf2FileUploader\I18n\Translator\TranslatorInterface' => 'Zf2FileUploader\I18n\Translator\Translator',
-            'Zend\EventManager\EventManagerInterface' => 'EventManager',
-            'Zend\ServiceManager\ServiceLocatorInterface' => 'ServiceManager'
-        )
+        'preference' => include __DIR__.'/di/preference.config.php'
     )
 );
