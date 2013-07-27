@@ -23,11 +23,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     protected $imageHttpPath = '';
 
     /**
-     * @var string
-     */
-    protected $resourceHttpPath = '';
-
-    /**
      * @var array
      */
     protected $thumbnailerThumbs = array();
@@ -46,11 +41,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var bool
      */
     protected $useQueryPreviewImageSize = true;
-
-    /**
-     * @var string
-     */
-    protected $resourcePersistentPath = '';
 
     /**
      * @var string
@@ -76,22 +66,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
      * @var int
      */
     protected $resizeHeight = 100;
-
-    /**
-     * @param string $resourceHttpPath
-     */
-    public function setResourceHttpPath($resourceHttpPath)
-    {
-        $this->resourceHttpPath = $resourceHttpPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResourceHttpPath()
-    {
-        return $this->resourceHttpPath;
-    }
 
     /**
      * @param string | array $thumbnailerThumbs
@@ -199,27 +173,6 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     }
 
     /**
-     * @param string $resourcePersistentPath
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setResourcePersistentPath($resourcePersistentPath)
-    {
-        $resourcePersistentPath = realpath($resourcePersistentPath);
-        if (!is_dir($resourcePersistentPath) || !is_writable($resourcePersistentPath)) {
-            throw new InvalidArgumentException("Resource persistent path $resourcePersistentPath is unreachable");
-        }
-        $this->resourcePersistentPath = $resourcePersistentPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResourcePersistentPath()
-    {
-        return $this->resourcePersistentPath;
-    }
-
-    /**
      * @param string $imagePersistentPath
      * @throws InvalidArgumentException
      */
@@ -227,7 +180,7 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     {
         $imagePersistentPath = realpath($imagePersistentPath);
         if (!is_dir($imagePersistentPath) || !is_writable($imagePersistentPath)) {
-            throw new InvalidArgumentException("Persistent path $imagePersistentPath is unreachable");
+            throw new InvalidArgumentException("Image persistent path $imagePersistentPath is unreachable");
         }
         $this->imagePersistentPath = $imagePersistentPath;
     }
