@@ -31,7 +31,7 @@ class FilesystemPersister extends AbstractFilesystemPersister implements ImagePe
     public function persist(ImageResourceInterface $resource)
     {
         $ext = $resource->getExt();
-        $baseName = uniqid().($ext ? '.'.$ext : '');
+        $baseName = $resource->getToken().($ext ? '.'.$ext : '');
         $target = realpath($this->options->getImagePersistentPath()).'/'.$baseName;
 
         $moveUploadedFilter = new Rename(array(
