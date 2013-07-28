@@ -12,8 +12,8 @@ return array(
         'Zf2FileUploader\I18n\Translator\Translator',
     'Zf2FileUploader\InputData\ImageResourceDataInterface' =>
         'Zf2FileUploader\InputData\CreateImageResourceData',
-    'Zf2FileUploader\Resource\AbstractResourceFactoryInterface' =>
-        'Zf2FileUploader\Resource\AbstractResourceFactory',
+    'Zf2FileUploader\Resource\AbstractFactory\ResourceInterface' =>
+        'Zf2FileUploader\Resource\AbstractFactory\Resource',
     'Zf2FileUploader\Service\Resource\Image\SaveServiceInterface' =>
         'Zf2FileUploader\Service\Resource\Image\SaveService',
     'Zf2FileUploader\Service\Resource\Image\DecorateServiceInterface' =>

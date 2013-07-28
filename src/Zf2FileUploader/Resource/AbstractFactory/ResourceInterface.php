@@ -1,7 +1,9 @@
 <?php
-namespace Zf2FileUploader\Resource;
+namespace Zf2FileUploader\Resource\AbstractFactory;
 
-interface AbstractResourceFactoryInterface
+use Zf2FileUploader\Resource\ImageResourceInterface;
+
+interface ResourceInterface
 {
     /**
      * @param array $data

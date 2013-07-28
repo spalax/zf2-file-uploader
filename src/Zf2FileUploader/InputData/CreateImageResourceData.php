@@ -4,21 +4,21 @@ namespace Zf2FileUploader\InputData;
 
 use Zend\InputFilter\FileInput;
 use Zend\Validator\File\MimeType;
-use Zf2FileUploader\Resource\AbstractResourceFactoryInterface;
+use Zf2FileUploader\Resource\AbstractFactory\ResourceInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 
 class CreateImageResourceData extends AbstractResourceData implements ImageResourceDataInterface
 {
     /**
-     * @var AbstractResourceFactoryInterface
+     * @var ResourceInterface
      */
     protected $abstractResourceFactory;
 
     /**
-     * @param AbstractResourceFactoryInterface $resourceFactory
+     * @param ResourceInterface $resourceFactory
      * @param string $fileInputName
      */
-    public function __construct(AbstractResourceFactoryInterface $resourceFactory, $fileInputName = 'resource')
+    public function __construct(ResourceInterface $resourceFactory, $fileInputName = 'resource')
     {
         $fileInput = new FileInput($fileInputName);
         $fileInput->setRequired(true);

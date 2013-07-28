@@ -21,8 +21,7 @@ abstract class AbstractResource implements ResourceInterface
     /**
      * @param string $path
      * @param string $ext
-     * @param null $token
-     * @return \Zf2FileUploader\Resource\AbstractResource
+     * @param string | null $token
      */
     public function __construct($path, $ext, $token = null)
     {

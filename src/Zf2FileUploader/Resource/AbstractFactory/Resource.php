@@ -1,13 +1,15 @@
 <?php
-namespace Zf2FileUploader\Resource;
+namespace Zf2FileUploader\Resource\AbstractFactory;
 
+use Zf2FileUploader\Resource\ImageResource;
+use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2Libs\Filter\File\ExtensionExtractor;
 
-class AbstractResourceFactory implements AbstractResourceFactoryInterface
+class Resource implements ResourceInterface
 {
     /**
      * @param array $data
-     * @return ImageResourceInterface[]
+     * @return ImageResourceInterface
      */
     public function createImageResource($data)
     {

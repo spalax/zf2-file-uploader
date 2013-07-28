@@ -40,8 +40,6 @@ class DatabasePersister extends AbstractDatabasePersister implements ImagePersis
         $this->entityManager->persist($imageResourceEntity);
         $this->entityManager->flush($imageResourceEntity);
 
-        $resource->setEntity($imageResourceEntity);
-
         return true;
     }
 }
