@@ -1,13 +1,13 @@
 <?php
 namespace Zf2FileUploader\Controller;
 
-use Zf2FileUploader\InputData\ResourceDataInterface;
-use Zf2FileUploader\View\Model\FailedUploaderModel;
+use Zf2FileUploader\InputFilter\ResourceInterface as ResourceDataInterface;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
+use Zf2FileUploader\View\Model\UploaderModel;
 
 abstract class AbstractCreateController extends AbstractController
 {
@@ -61,7 +61,7 @@ abstract class AbstractCreateController extends AbstractController
                 $response->setStatusCode(400);
             } else {
                 $this->getEventManager()->clearListeners(MvcEvent::EVENT_DISPATCH);
-                $this->getEvent()->setResult(new FailedUploaderModel($this->getDataResourceCreator()));
+                $this->getEvent()->setResult(new UploaderModel($this->getDataResourceCreator()));
             }
             
             $this->getEventManager()->trigger(self::EVENT_INVALID_DATA_POST_HANDLER, $this);

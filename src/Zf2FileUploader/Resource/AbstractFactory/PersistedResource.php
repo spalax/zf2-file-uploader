@@ -16,11 +16,14 @@ class PersistedResource implements PersistedResourceInterface
 
     /**
      * @param array $data
-     * @return ImageResource
+     * @return ImageResource | null
      */
     public function loadImageResource($token)
     {
         $entity = $this->imageRepository->findOneByToken($token);
+        if (!$entity) {
+            return null;
+        }
         return new ImageResource($entity);
     }
 }

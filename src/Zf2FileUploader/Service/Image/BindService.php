@@ -5,7 +5,6 @@ use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
 use Zf2FileUploader\Service\Exception\DomainException;
 use Doctrine\ORM\EntityManager;
 use Zf2FileUploader\Entity\ImageBindInterface;
-use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 
 class BindService implements BindServiceInterface
 {
@@ -15,18 +14,11 @@ class BindService implements BindServiceInterface
     protected $entityManager;
 
     /**
-     * @var ImageResourceOptionsInterface
-     */
-    protected $options;
-
-    /**
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager,
-                                ImageResourceOptionsInterface $options)
+    public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->options = $options;
     }
 
     /**
@@ -38,33 +30,22 @@ class BindService implements BindServiceInterface
     {
         try {
             $this->entityManager->beginTransaction();
+            $imageEntity = $resource->getEntity();
+
+            $this->entityManager->persist($imageEntity);
             $this->entityManager->persist($binder);
             if (is_null($resource->getEntity())) {
                 throw new DomainException("Could not get entity from resource,
                                            resource not loaded correctly");
             }
 
-            $binder->addImage($resource->getEntity());
+            $imageEntity->setTemporary(false);
+
+            $binder->addImage($imageEntity);
+
             $this->entityManager->flush($binder);
+            $this->entityManager->flush($imageEntity);
 
-            $this->entityManager->commit();
-        } catch (\Exception $e) {
-            $this->entityManager->rollback();
-            throw $e;
-        }
-    }
-
-    /**
-     * @param array $resources
-     * @param ImageBindInterface $binder
-     */
-    public function bindCollection(array $resources, ImageBindInterface $binder)
-    {
-        try {
-            $this->entityManager->beginTransaction();
-            foreach ($resources as $resource) {
-                $this->bind($resource, $binder);
-            }
             $this->entityManager->commit();
         } catch (\Exception $e) {
             $this->entityManager->rollback();

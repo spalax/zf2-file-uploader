@@ -1,7 +1,6 @@
 <?php
 namespace Zf2FileUploader\Service\Image;
 
-
 use Zf2FileUploader\Entity\ImageBindInterface;
 use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
 
@@ -13,10 +12,4 @@ interface BindServiceInterface
      * @return void
      */
     public function bind(ImageResourceInterface $resource, ImageBindInterface $binder);
-
-    /**
-     * @param ImageResourceInterface[] $resources
-     * @return void
-     */
-    public function bindCollection(array $resources, ImageBindInterface $binder);
 }

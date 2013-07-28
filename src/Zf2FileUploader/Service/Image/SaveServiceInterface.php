@@ -3,21 +3,16 @@ namespace Zf2FileUploader\Service\Image;
 
 
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Service\Response\ImageResponseInterface;
+use Zf2FileUploader\Service\Exception\DecoratorException;
+use Zf2FileUploader\Service\Exception\PersisterException;
 
 interface SaveServiceInterface
 {
     /**
      * @param ImageResourceInterface $resource
-     * @param ImageResponseInterface $response
-     * @return ImageResponseInterface
      * @throws \Exception
+     * @throws PersisterException
+     * @throws DecoratorException
      */
-    public function save(ImageResourceInterface $resource, ImageResponseInterface $response = null);
-
-    /**
-     * @param ImageResourceInterface[] $resources
-     * @return ImageResourceInterface[]
-     */
-    public function saveCollection(array $resources);
+    public function save(ImageResourceInterface $resource);
 }

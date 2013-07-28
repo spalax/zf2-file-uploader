@@ -3,4 +3,4 @@ namespace Zf2FileUploader\Service\Exception;
 
 use Zf2FileUploader\Exception\ExceptionInterface;
 
-class DomainException extends \DomainException implements ExceptionInterface {}
+class DecoratorException  extends DomainException implements ExceptionInterface {}

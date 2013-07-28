@@ -3,7 +3,7 @@ namespace Zf2FileUploader\Resource\Persisted;
 
 use Zf2FileUploader\Entity\ImageInterface;
 use Zf2FileUploader\Resource\ImageResource as GenericImageResource;
-use Zf2FileUploader\Resource\ImageResourceInterface;
+use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
 
 class ImageResource extends GenericImageResource implements ImageResourceInterface
 {
@@ -15,6 +15,13 @@ class ImageResource extends GenericImageResource implements ImageResourceInterfa
     public function __construct(ImageInterface $imageEntity)
     {
         $this->resourceEntity = $imageEntity;
+
+        $this->setPath($imageEntity->getPath());
+        $this->setHttpPath($imageEntity->getHttpPath());
+        $this->setToken($imageEntity->getToken());
+
+        $info = pathinfo($imageEntity->getPath());
+        $this->setExt($info['extension']);
     }
 
     /**

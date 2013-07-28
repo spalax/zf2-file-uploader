@@ -1,15 +1,15 @@
 <?php
-namespace Zf2FileUploader\InputData;
+namespace Zf2FileUploader\InputFilter;
 
-use Zf2FileUploader\InputData\Exception\InvalidArgumentException;
+use Zf2FileUploader\InputFilter\Exception\InvalidArgumentException;
 use Zf2FileUploader\MessagesInterface;
 
-interface ResourceDataInterface extends MessagesInterface
+interface ResourceInterface extends MessagesInterface
 {
     /**
      * @param  array | \Traversable $data
      * @throws InvalidArgumentException
-     * @return ResourceDataInterface
+     * @return ResourceInterface
      */
     public function setData($data);
 

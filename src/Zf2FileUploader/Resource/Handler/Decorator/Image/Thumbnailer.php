@@ -6,6 +6,7 @@ use Zf2FileUploader\Resource\Handler\Decorator\Exception\DomainException;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface as ImagineImageInterface;
 use Imagine\Gd\Imagine;
+use Zf2FileUploader\Resource\Handler\Decorator\Exception\InvalidArgumentException;
 use Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 
@@ -19,11 +20,19 @@ class Thumbnailer implements ImageDecoratorInterface
     /**
      * @param string | ThumbnailerOptionsInterface $options
      * @throws DomainException
+     * @throws InvalidArgumentException
      */
     public function __construct($options)
     {
         if (is_string($options) && ($thumb = $this->getSizeFromThumb($options))) {
             $this->thumbnails[] = $thumb;
+        } else if (is_array($options)) {
+            foreach ($options as $option) {
+                if (!($thumb = $this->getSizeFromThumb($option))) {
+                    throw new InvalidArgumentException("Could not parse option ".$option);
+                }
+                $this->thumbnails[] = $this->getSizeFromThumb($option);
+            }
         } else if ($options instanceof ThumbnailerOptionsInterface) {
              foreach ($options->getThumbnailerThumbs() as $thumb) {
                  $this->thumbnails[] = $this->getSizeFromThumb($thumb);

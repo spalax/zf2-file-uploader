@@ -1,9 +1,9 @@
 <?php
-namespace Zf2FileUploader\InputData;
+namespace Zf2FileUploader\InputFilter\Image;
 
 use Zf2FileUploader\Resource\ImageResourceInterface;
 
-interface ImageResourceDataInterface extends ResourceDataInterface
+interface CreateResourceInterface
 {
     /**
      * @return ImageResourceInterface[]

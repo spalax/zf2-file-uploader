@@ -3,9 +3,10 @@ namespace Zf2FileUploader\Controller\Images;
 
 use Zf2FileUploader\Controller\AbstractCreateController;
 use Zend\Mvc\MvcEvent;
-use Zf2FileUploader\InputData\ImageResourceDataInterface;
+use Zf2FileUploader\InputFilter\Image\CreateResourceInterface as ImageCreateResourceFilterInterface;
 use Zf2FileUploader\Service\Image\SaveServiceInterface;
-use Zf2FileUploader\View\Model\ImageResponseUploaderModel;
+use Zf2FileUploader\Service\Exception;
+use Zf2FileUploader\View\Model\UploaderModel;
 
 class CreateController extends AbstractCreateController
 {
@@ -15,15 +16,15 @@ class CreateController extends AbstractCreateController
     protected $saveService = null;
 
     /**
-     * @var ImageResourceDataInterface
+     * @var ImageCreateResourceFilterInterface
      */
     protected $createResourceData;
 
     /**
-     * @param ImageResourceDataInterface $createResourceData
+     * @param ImageCreateResourceFilterInterface $createResourceData
      * @param SaveServiceInterface $saveService
      */
-    public function __construct(ImageResourceDataInterface $createResourceData,
+    public function __construct(ImageCreateResourceFilterInterface $createResourceData,
                                 SaveServiceInterface $saveService)
     {
         $this->createResourceData = $createResourceData;
@@ -31,7 +32,7 @@ class CreateController extends AbstractCreateController
     }
 
     /**
-     * @return ImageResourceDataInterface
+     * @return ImageCreateResourceFilterInterface
      */
     protected function getDataResourceCreator()
     {
@@ -44,7 +45,19 @@ class CreateController extends AbstractCreateController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $responses = $this->saveService->saveCollection($this->getDataResourceCreator()->getResources());
-        $e->setResult(new ImageResponseUploaderModel($responses));
+        $result = new UploaderModel();
+
+        try {
+            foreach ($this->getDataResourceCreator()->getResources() as $resource) {
+                $this->saveService->save($resource);
+                $result->addResource($resource);
+            }
+
+            $result->success();
+        } catch (\Exception $e) {
+            $result->fail();
+        }
+
+        $e->setResult($result);
     }
 }
