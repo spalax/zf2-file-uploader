@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Response;
+namespace Zf2FileUploader\Service\Response;
 
 abstract class AbstractResponse implements ResponseInterface
 {

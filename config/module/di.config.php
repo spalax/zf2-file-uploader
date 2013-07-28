@@ -59,14 +59,14 @@ return array(
             )
         ),
 
-        'Zf2FileUploader\Service\Resource\Image\SaveService' => array(
+        'Zf2FileUploader\Service\Image\SaveService' => array(
             'parameters' => array(
                 'persister' => 'Zf2FileUploader\Resource\Handler\Persister\Image\AggregatePersister',
                 'cleaner' => 'Zf2FileUploader\Service\Cleaner\ImageTemporaryCleaner'
             )
         ),
 
-        'Zf2FileUploader\Service\Resource\Image\DecorateService' => array(
+        'Zf2FileUploader\Service\Image\DecorateService' => array(
             'parameters' => array(
                 'decorator' => 'Zf2FileUploader\Resource\Handler\Decorator\Image\AggregateDecorator'
             )

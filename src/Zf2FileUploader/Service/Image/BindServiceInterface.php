@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Image;
+namespace Zf2FileUploader\Service\Image;
 
 
 use Zf2FileUploader\Entity\ImageBindInterface;

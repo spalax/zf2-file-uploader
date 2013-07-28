@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Response;
+namespace Zf2FileUploader\Service\Response;
 
 use Zf2FileUploader\MessagesInterface;
 use Zf2FileUploader\Resource\ResourceInterface;

@@ -2,7 +2,7 @@
 namespace Zf2FileUploader\View\Model;
 
 use Zf2FileUploader\Resource\ResourceViewableInterface;
-use Zf2FileUploader\Service\Resource\Response\ResponseInterface;
+use Zf2FileUploader\Service\Response\ResponseInterface;
 
 abstract class AbstractResponseUploaderModel extends UploaderModel
 {

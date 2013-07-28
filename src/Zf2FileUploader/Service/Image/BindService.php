@@ -1,8 +1,8 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Image;
+namespace Zf2FileUploader\Service\Image;
 
 use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
-use Zf2FileUploader\Service\Resource\Exception\DomainException;
+use Zf2FileUploader\Service\Exception\DomainException;
 use Doctrine\ORM\EntityManager;
 use Zf2FileUploader\Entity\ImageBindInterface;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;

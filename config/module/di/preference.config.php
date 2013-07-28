@@ -14,10 +14,10 @@ return array(
         'Zf2FileUploader\InputData\CreateImageResourceData',
     'Zf2FileUploader\Resource\AbstractFactory\ResourceInterface' =>
         'Zf2FileUploader\Resource\AbstractFactory\Resource',
-    'Zf2FileUploader\Service\Resource\Image\SaveServiceInterface' =>
-        'Zf2FileUploader\Service\Resource\Image\SaveService',
-    'Zf2FileUploader\Service\Resource\Image\DecorateServiceInterface' =>
-        'Zf2FileUploader\Service\Resource\Image\DecorateService',
+    'Zf2FileUploader\Service\Image\SaveServiceInterface' =>
+        'Zf2FileUploader\Service\Image\SaveService',
+    'Zf2FileUploader\Service\Image\DecorateServiceInterface' =>
+        'Zf2FileUploader\Service\Image\DecorateService',
     'Zend\EventManager\EventManagerInterface' =>
         'EventManager',
     'Zend\ServiceManager\ServiceLocatorInterface' =>

@@ -1,11 +1,11 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Image;
+namespace Zf2FileUploader\Service\Image;
 
 use Zf2FileUploader\I18n\Translator\TranslatorInterface;
 use Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Service\Resource\Response\ImageResponse;
-use Zf2FileUploader\Service\Resource\Response\ImageResponseInterface;
+use Zf2FileUploader\Service\Response\ImageResponse;
+use Zf2FileUploader\Service\Response\ImageResponseInterface;
 
 class DecorateService implements DecorateServiceInterface
 {

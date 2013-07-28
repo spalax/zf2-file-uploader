@@ -1,7 +1,7 @@
 <?php
 namespace Zf2FileUploader\View\Model;
 
-use Zf2FileUploader\Service\Resource\Response\ImageResponseInterface;
+use Zf2FileUploader\Service\Response\ImageResponseInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
 
 class ImageResponseUploaderModel extends AbstractResponseUploaderModel

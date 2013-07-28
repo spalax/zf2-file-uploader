@@ -4,7 +4,7 @@ namespace Zf2FileUploader\Controller\Images;
 use Zf2FileUploader\Controller\AbstractCreateController;
 use Zend\Mvc\MvcEvent;
 use Zf2FileUploader\InputData\ImageResourceDataInterface;
-use Zf2FileUploader\Service\Resource\Image\SaveServiceInterface;
+use Zf2FileUploader\Service\Image\SaveServiceInterface;
 use Zf2FileUploader\View\Model\ImageResponseUploaderModel;
 
 class CreateController extends AbstractCreateController

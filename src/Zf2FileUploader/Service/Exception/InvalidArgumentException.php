@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Service\Resource\Exception;
+namespace Zf2FileUploader\Service\Exception;
 
 use Zf2FileUploader\Exception\ExceptionInterface;
 
