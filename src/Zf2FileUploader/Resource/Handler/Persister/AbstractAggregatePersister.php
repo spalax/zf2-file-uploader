@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister;
+namespace Zf2FileUploader\Resource\Handler\Persister;
 
 abstract class AbstractAggregatePersister implements PersisterInterface
 {

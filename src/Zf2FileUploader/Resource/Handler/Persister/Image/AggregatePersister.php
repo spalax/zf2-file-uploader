@@ -1,9 +1,9 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister\Image;
+namespace Zf2FileUploader\Resource\Handler\Persister\Image;
 
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Resource\Persister\AbstractAggregatePersister;
-use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\AbstractAggregatePersister;
+use Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface;
 
 class AggregatePersister extends AbstractAggregatePersister implements ImagePersisterInterface
 {

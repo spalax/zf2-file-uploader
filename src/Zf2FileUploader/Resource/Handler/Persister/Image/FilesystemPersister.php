@@ -1,11 +1,11 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister\Image;
+namespace Zf2FileUploader\Resource\Handler\Persister\Image;
 
 use Zend\Filter\File\Rename;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Resource\Persister\AbstractFilesystemPersister;
-use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\AbstractFilesystemPersister;
+use Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface;
 
 class FilesystemPersister extends AbstractFilesystemPersister implements ImagePersisterInterface
 {

@@ -2,9 +2,9 @@
 return array(
     'definition' => array(
         'class' => array(
-            'Zf2FileUploader\Resource\Persister\Image\AggregatePersister' => array(
+            'Zf2FileUploader\Resource\Handler\Persister\Image\AggregatePersister' => array(
                 'addPersister' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Persister\ImagePersisterInterface',
+                    array('type' => 'Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface',
                           'required' => true)
                 )
             ),
@@ -39,10 +39,10 @@ return array(
             )
         ),
 
-        'Zf2FileUploader\Resource\Persister\Image\AggregatePersister' => array(
+        'Zf2FileUploader\Resource\Handler\Persister\Image\AggregatePersister' => array(
             'injections' => array(
-                'Zf2FileUploader\Resource\Persister\Image\FilesystemPersister',
-                'Zf2FileUploader\Resource\Persister\Image\DatabasePersister'
+                'Zf2FileUploader\Resource\Handler\Persister\Image\FilesystemPersister',
+                'Zf2FileUploader\Resource\Handler\Persister\Image\DatabasePersister'
             )
         ),
 
@@ -61,7 +61,7 @@ return array(
 
         'Zf2FileUploader\Service\Resource\Image\SaveService' => array(
             'parameters' => array(
-                'persister' => 'Zf2FileUploader\Resource\Persister\Image\AggregatePersister',
+                'persister' => 'Zf2FileUploader\Resource\Handler\Persister\Image\AggregatePersister',
                 'cleaner' => 'Zf2FileUploader\Service\Cleaner\ImageTemporaryCleaner'
             )
         ),

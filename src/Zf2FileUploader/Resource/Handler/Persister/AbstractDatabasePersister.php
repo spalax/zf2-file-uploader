@@ -1,8 +1,8 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister;
+namespace Zf2FileUploader\Resource\Handler\Persister;
 
 use Doctrine\ORM\EntityManager;
-use Zf2FileUploader\Resource\Persister\PersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\PersisterInterface;
 
 abstract class AbstractDatabasePersister implements PersisterInterface
 {

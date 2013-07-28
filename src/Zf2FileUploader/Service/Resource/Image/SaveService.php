@@ -3,7 +3,7 @@ namespace Zf2FileUploader\Service\Resource\Image;
 
 use Zf2FileUploader\I18n\Translator\TranslatorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface;
 use Zf2FileUploader\Service\Cleaner\CleanerStrategyInterface;
 use Zf2FileUploader\Service\Resource\Response\ImageResponse;
 use Zf2FileUploader\Service\Resource\Response\ImageResponseInterface;

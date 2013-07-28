@@ -1,11 +1,11 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister\Image;
+namespace Zf2FileUploader\Resource\Handler\Persister\Image;
 
 use Doctrine\ORM\EntityManager;
 use Zf2FileUploader\Entity\ImageInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
-use Zf2FileUploader\Resource\Persister\AbstractDatabasePersister;
-use Zf2FileUploader\Resource\Persister\ImagePersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\AbstractDatabasePersister;
+use Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface;
 
 class DatabasePersister extends AbstractDatabasePersister implements ImagePersisterInterface
 {

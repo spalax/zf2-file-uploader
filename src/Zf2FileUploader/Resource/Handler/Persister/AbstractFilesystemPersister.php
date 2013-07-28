@@ -1,7 +1,7 @@
 <?php
-namespace Zf2FileUploader\Resource\Persister;
+namespace Zf2FileUploader\Resource\Handler\Persister;
 
-use Zf2FileUploader\Resource\Persister\PersisterInterface;
+use Zf2FileUploader\Resource\Handler\Persister\PersisterInterface;
 
 abstract class AbstractFilesystemPersister implements PersisterInterface
 {
