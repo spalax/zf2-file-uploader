@@ -1,12 +1,12 @@
 <?php
-namespace Zf2FileUploader\Resource\Decorator\Image;
+namespace Zf2FileUploader\Resource\Handler\Decorator\Image;
 
 use Zf2FileUploader\Options\Resource\Decorator\ThumbnailerOptionsInterface;
-use Zf2FileUploader\Resource\Decorator\Exception\DomainException;
+use Zf2FileUploader\Resource\Handler\Decorator\Exception\DomainException;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface as ImagineImageInterface;
 use Imagine\Gd\Imagine;
-use Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 
 class Thumbnailer implements ImageDecoratorInterface

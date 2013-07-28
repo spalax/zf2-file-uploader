@@ -16,9 +16,9 @@ return array(
                 )
             ),
 
-            'Zf2FileUploader\Resource\Decorator\Image\AggregateDecorator' => array(
+            'Zf2FileUploader\Resource\Handler\Decorator\Image\AggregateDecorator' => array(
                 'addDecorator' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface',
+                    array('type' => 'Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface',
                           'required' => true)
                 )
             )
@@ -68,7 +68,7 @@ return array(
 
         'Zf2FileUploader\Service\Resource\Image\DecorateService' => array(
             'parameters' => array(
-                'decorator' => 'Zf2FileUploader\Resource\Decorator\Image\AggregateDecorator'
+                'decorator' => 'Zf2FileUploader\Resource\Handler\Decorator\Image\AggregateDecorator'
             )
         ),
 

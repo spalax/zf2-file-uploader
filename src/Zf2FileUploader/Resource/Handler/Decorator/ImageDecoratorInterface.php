@@ -1,5 +1,5 @@
 <?php
-namespace Zf2FileUploader\Resource\Decorator;
+namespace Zf2FileUploader\Resource\Handler\Decorator;
 
 use Zf2FileUploader\Resource\ImageResourceInterface;
 

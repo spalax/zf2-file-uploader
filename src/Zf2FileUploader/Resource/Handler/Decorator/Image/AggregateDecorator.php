@@ -1,7 +1,7 @@
 <?php
-namespace Zf2FileUploader\Resource\Decorator\Image;
+namespace Zf2FileUploader\Resource\Handler\Decorator\Image;
 
-use Zf2FileUploader\Resource\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 
 class AggregateDecorator implements ImageDecoratorInterface
