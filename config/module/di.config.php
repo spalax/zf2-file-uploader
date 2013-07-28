@@ -9,9 +9,9 @@ return array(
                 )
             ),
 
-            'Zf2FileUploader\Resource\Remover\AggregateRemover' => array(
+            'Zf2FileUploader\Resource\Handler\Remover\AggregateRemover' => array(
                 'addRemover' => array(
-                    array('type' => 'Zf2FileUploader\Resource\Remover\RemoverInterface',
+                    array('type' => 'Zf2FileUploader\Resource\Handler\Remover\RemoverInterface',
                           'required' => true)
                 )
             ),
@@ -35,7 +35,7 @@ return array(
 
         'Zf2FileUploader\Service\Cleaner\ImageTemporaryCleaner' => array(
             'parameters'=> array(
-                'remover' => 'Zf2FileUploader\Resource\Remover\AggregateRemover'
+                'remover' => 'Zf2FileUploader\Resource\Handler\Remover\AggregateRemover'
             )
         ),
 
@@ -46,16 +46,16 @@ return array(
             )
         ),
 
-        'Zf2FileUploader\Resource\Remover\AggregateRemover' => array(
+        'Zf2FileUploader\Resource\Handler\Remover\AggregateRemover' => array(
             'injections' => array(
-                'Zf2FileUploader\Resource\Remover\FilesystemRemover',
-                'Zf2FileUploader\Resource\Remover\DatabaseRemover'
+                'Zf2FileUploader\Resource\Handler\Remover\FilesystemRemover',
+                'Zf2FileUploader\Resource\Handler\Remover\DatabaseRemover'
             )
         ),
 
         'Zf2FileUploader\Service\TemporaryResourcesCleaner' => array(
             'parameters' => array(
-                'remover' => 'Zf2FileUploader\Resource\Remover\AggregateRemover'
+                'remover' => 'Zf2FileUploader\Resource\Handler\Remover\AggregateRemover'
             )
         ),
 

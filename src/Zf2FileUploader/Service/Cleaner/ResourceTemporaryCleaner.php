@@ -3,7 +3,7 @@ namespace Zf2FileUploader\Service\Cleaner;
 
 use Doctrine\ORM\EntityRepository;
 use Zf2FileUploader\Options\TemporaryCleanerOptionsInterface;
-use Zf2FileUploader\Resource\Remover\RemoverInterface;
+use Zf2FileUploader\Resource\Handler\Remover\RemoverInterface;
 
 abstract class ResourceTemporaryCleaner implements CleanerStrategyInterface
 {
