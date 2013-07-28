@@ -9,4 +9,10 @@ interface LoadResourceInterface
      * @return ImageResourceInterface[]
      */
     public function getResources();
+
+    /**
+     * @param bool $allowEmpty
+     * @return LoadResourceInterface
+     */
+    public function setAllowEmpty($allowEmpty);
 }
