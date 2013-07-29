@@ -19,11 +19,6 @@ class SaveService implements SaveServiceInterface
     protected $persister;
 
     /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * @var ImageDecoratorInterface
      */
     protected $decorator;
@@ -37,16 +32,13 @@ class SaveService implements SaveServiceInterface
      * @param ImagePersisterInterface $persister
      * @param ImageDecoratorInterface $decorator
      * @param CleanerStrategyInterface $cleaner
-     * @param TranslatorInterface $translator
      */
     public function __construct(ImagePersisterInterface $persister,
                                 ImageDecoratorInterface $decorator = null,
-                                CleanerStrategyInterface $cleaner,
-                                TranslatorInterface $translator)
+                                CleanerStrategyInterface $cleaner)
     {
         $this->persister = $persister;
         $this->decorator = $decorator;
-        $this->translator = $translator;
         $this->cleaner = $cleaner;
     }
 

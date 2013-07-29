@@ -26,7 +26,7 @@ class FilesystemRemover implements RemoverInterface
         /* @var $file \DirectoryIterator */
         foreach ($directory as $file) {
             if ($file->isDir()) continue;
-            if (preg_match('/^'.$resource->getToken().'.+/', $file->getBasename())) {
+            if (preg_match('/^'.$resource->getToken().'.+\..*?/', $file->getBasename())) {
                 if (!unlink($file->getRealPath())) {
                     $result = false;
                 }

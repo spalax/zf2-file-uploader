@@ -11,9 +11,6 @@ use Zf2FileUploader\View\Model\UploaderModel;
 
 abstract class AbstractCreateController extends AbstractController
 {
-    const EVENT_INVALID_DATA_PRE_HANDLER = 'uploader.create.invalid.data.preDecorator';
-    const EVENT_INVALID_DATA_POST_HANDLER = 'uploader.create.invalid.data.postDecorator';
-
     /**
      * @var boolean
      */
@@ -50,10 +47,6 @@ abstract class AbstractCreateController extends AbstractController
 
 
         if (!$this->getDataResourceCreator()->isValid()) {
-            $this->getEventManager()->trigger(self::EVENT_INVALID_DATA_PRE_HANDLER,
-                                              $this,
-                                              array($this->getDataResourceCreator()));
-
             if ($this->disableDefaultErrorHandler) {
                 $response = $response ?: new HttpResponse();
                 $this->getEventManager()->clearListeners(MvcEvent::EVENT_DISPATCH);
@@ -63,8 +56,6 @@ abstract class AbstractCreateController extends AbstractController
                 $this->getEventManager()->clearListeners(MvcEvent::EVENT_DISPATCH);
                 $this->getEvent()->setResult(new UploaderModel($this->getDataResourceCreator()));
             }
-            
-            $this->getEventManager()->trigger(self::EVENT_INVALID_DATA_POST_HANDLER, $this);
         }
 
         parent::dispatch($request, $response);
