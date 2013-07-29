@@ -3,10 +3,11 @@ namespace Zf2FileUploader\View\Model;
 
 use Zend\View\Model\ViewModel;
 use Zf2FileUploader\Resource\ResourceViewableInterface;
+use Zf2FileUploader\View\Filter\FilterInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
 use Zf2FileUploader\MessagesInterface;
 
-class UploaderModel extends ViewModel
+class UploaderModel extends ViewModel implements UploaderModelInterface
 {
     const STATUS_SUCCESS = 'success';
     const STATUS_FAILED = 'failed';
@@ -19,13 +20,13 @@ class UploaderModel extends ViewModel
     protected $terminate = true;
 
     /**
-     * @param MessagesInterface[] | MessagesInterface | \Traversable | string | null $messages
+     * @var FilterInterface
      */
-    public function __construct($messages = null)
+    protected $filter = null;
+
+    public function __construct(FilterInterface $filter = null)
     {
-        if (!is_null($messages)) {
-            $this->setMessages($messages);
-        }
+        $this->filter = $filter;
     }
 
     /**
@@ -69,10 +70,12 @@ class UploaderModel extends ViewModel
      */
     public function addResource(ResourceViewableInterface $resource)
     {
+        if (!is_null($this->filter)) {
+            $resource = $this->filter->filter(clone $resource);
+        }
+
         $resources = $this->getVariable('resources', array());
-
         $resources[$resource->getToken()] = $resource->getHttpPath();
-
         $this->setVariable('resources', $resources);
     }
 

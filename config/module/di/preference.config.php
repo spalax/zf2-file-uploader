@@ -3,9 +3,6 @@ return array(
     'Zf2FileUploader\Options\TemporaryCleanerOptionsInterface' =>
         'Zf2FileUploader\Options\ModuleOptions',
 
-    'Zf2FileUploader\Options\InputValidatorOptionsInterface' =>
-        'Zf2FileUploader\Options\ModuleOptions',
-
     'Zf2FileUploader\Options\ResourceOptionsInterface' =>
         'Zf2FileUploader\Options\ModuleOptions',
 
@@ -30,14 +27,17 @@ return array(
     'Zf2FileUploader\Service\Image\SaveServiceInterface' =>
         'Zf2FileUploader\Service\Image\SaveService',
 
-    'Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface' =>
-        'Zf2FileUploader\Resource\Handler\Decorator\Image\AggregateDecorator',
+    'Zf2FileUploader\Resource\Handler\Processor\ImageProcessorInterface' =>
+        'Zf2FileUploader\Resource\Handler\Processor\Image\AggregateProcessor',
 
     'Zf2FileUploader\Service\Image\BindServiceInterface' =>
         'Zf2FileUploader\Service\Image\BindService',
 
     'Zf2FileUploader\Input\Image\LoadResourceInterface' =>
         'Zf2FileUploader\Input\Image\LoadResource',
+
+    'Imagine\Image\ImagineInterface' =>
+        'Imagine\Gd\Imagine',
 
     'Zend\EventManager\EventManagerInterface' =>
         'EventManager',

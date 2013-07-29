@@ -7,13 +7,14 @@ use Zf2FileUploader\InputFilter\Image\CreateResourceInterface as ImageCreateReso
 use Zf2FileUploader\Service\Image\SaveServiceInterface;
 use Zf2FileUploader\Service\Exception;
 use Zf2FileUploader\View\Model\UploaderModel;
+use Zf2FileUploader\View\Model\UploaderModelInterface;
 
 class CreateController extends AbstractCreateController
 {
     /**
      * @var SaveServiceInterface
      */
-    protected $saveService = null;
+    protected $saveService;
 
     /**
      * @var ImageCreateResourceFilterInterface
@@ -24,11 +25,13 @@ class CreateController extends AbstractCreateController
      * @param ImageCreateResourceFilterInterface $createResourceData
      * @param SaveServiceInterface $saveService
      */
-    public function __construct(ImageCreateResourceFilterInterface $createResourceData,
+    public function __construct(UploaderModelInterface $uploaderModel,
+                                ImageCreateResourceFilterInterface $createResourceData,
                                 SaveServiceInterface $saveService)
     {
         $this->createResourceData = $createResourceData;
         $this->saveService = $saveService;
+        parent::__construct($uploaderModel);
     }
 
     /**
@@ -45,19 +48,17 @@ class CreateController extends AbstractCreateController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $result = new UploaderModel();
-
         try {
             foreach ($this->getDataResourceCreator()->getResources() as $resource) {
                 $this->saveService->save($resource);
-                $result->addResource($resource);
+                $this->uploaderModel->addResource($resource);
             }
 
-            $result->success();
+            $this->uploaderModel->success();
         } catch (\Exception $e) {
-            $result->fail();
+            $this->uploaderModel->fail();
         }
 
-        $e->setResult($result);
+        $e->setResult($this->uploaderModel);
     }
 }

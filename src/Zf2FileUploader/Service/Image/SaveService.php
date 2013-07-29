@@ -1,15 +1,12 @@
 <?php
 namespace Zf2FileUploader\Service\Image;
 
-use Zf2FileUploader\I18n\Translator\TranslatorInterface;
-use Zf2FileUploader\Resource\Handler\Decorator\ImageDecoratorInterface;
+use Zf2FileUploader\Resource\Handler\Processor\ImageProcessorInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2FileUploader\Resource\Handler\Persister\ImagePersisterInterface;
 use Zf2FileUploader\Service\Cleaner\CleanerStrategyInterface;
-use Zf2FileUploader\Service\Exception\DecoratorException;
+use Zf2FileUploader\Service\Exception\ProcessorException;
 use Zf2FileUploader\Service\Exception\PersisterException;
-use Zf2FileUploader\Service\Response\ImageResponse;
-use Zf2FileUploader\Service\Response\ImageResponseInterface;
 
 class SaveService implements SaveServiceInterface
 {
@@ -19,9 +16,9 @@ class SaveService implements SaveServiceInterface
     protected $persister;
 
     /**
-     * @var ImageDecoratorInterface
+     * @var ImageProcessorInterface
      */
-    protected $decorator;
+    protected $processor;
 
     /**
      * @var CleanerStrategyInterface
@@ -30,15 +27,15 @@ class SaveService implements SaveServiceInterface
 
     /**
      * @param ImagePersisterInterface $persister
-     * @param ImageDecoratorInterface $decorator
+     * @param ImageProcessorInterface $processor
      * @param CleanerStrategyInterface $cleaner
      */
     public function __construct(ImagePersisterInterface $persister,
-                                ImageDecoratorInterface $decorator = null,
+                                ImageProcessorInterface $processor = null,
                                 CleanerStrategyInterface $cleaner)
     {
         $this->persister = $persister;
-        $this->decorator = $decorator;
+        $this->processor = $processor;
         $this->cleaner = $cleaner;
     }
 
@@ -46,7 +43,7 @@ class SaveService implements SaveServiceInterface
      * @param ImageResourceInterface $resource
      * @throws \Exception
      * @throws PersisterException
-     * @throws DecoratorException
+     * @throws ProcessorException
      */
     public function save(ImageResourceInterface $resource)
     {
@@ -58,10 +55,10 @@ class SaveService implements SaveServiceInterface
                                              " with persister ".get_class($this->persister));
             }
 
-            if (!is_null($this->decorator)) {
-                if (!$this->decorator->decorate($resource)) {
-                    throw new DecoratorException("Could not decorate resource ".$resource->getToken().
-                                                 " with decorator ".get_class($this->decorator));
+            if (!is_null($this->processor)) {
+                if (!$this->processor->process($resource)) {
+                    throw new ProcessorException("Could not process resource ".$resource->getToken().
+                                                 " with processor ".get_class($this->processor));
                 }
             }
 

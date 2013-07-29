@@ -7,7 +7,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
-use Zf2FileUploader\View\Model\UploaderModel;
+use Zf2FileUploader\View\Model\UploaderModelInterface;
 
 abstract class AbstractCreateController extends AbstractController
 {
@@ -15,6 +15,11 @@ abstract class AbstractCreateController extends AbstractController
      * @var boolean
      */
     protected $disableDefaultErrorHandler = false;
+
+    /**
+     * @var UploaderModelInterface
+     */
+    protected $uploaderModel;
 
     /**
      * @return ResourceDataInterface
@@ -29,6 +34,14 @@ abstract class AbstractCreateController extends AbstractController
     {
         $this->disableDefaultErrorHandler = $flag;
         return $this;
+    }
+
+    /**
+     * @param UploaderModelInterface $uploaderModel
+     */
+    public function __construct(UploaderModelInterface $uploaderModel)
+    {
+        $this->uploaderModel = $uploaderModel;
     }
 
     /**
@@ -54,7 +67,9 @@ abstract class AbstractCreateController extends AbstractController
                 $response->setStatusCode(400);
             } else {
                 $this->getEventManager()->clearListeners(MvcEvent::EVENT_DISPATCH);
-                $this->getEvent()->setResult(new UploaderModel($this->getDataResourceCreator()));
+                $this->uploaderModel->setMessages($this->getDataResourceCreator());
+
+                $this->getEvent()->setResult($this->uploaderModel);
             }
         }
 
