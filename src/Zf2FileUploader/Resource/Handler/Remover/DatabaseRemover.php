@@ -23,6 +23,7 @@ class DatabaseRemover implements RemoverInterface
     public function remove(ResourceInterface $entity)
     {
         try {
+            $this->entityManager->persist($entity);
             $this->entityManager->remove($entity);
             $this->entityManager->flush($entity);
         } catch (\Exception $e) {

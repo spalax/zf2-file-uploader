@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `image`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `image` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `token` varchar(50) NOT NULL,
+  `token` varchar(150) NOT NULL,
   `path` varchar(500) NOT NULL,
   `http_path` varchar(250) NOT NULL,
   `alt` varchar(250) NOT NULL,

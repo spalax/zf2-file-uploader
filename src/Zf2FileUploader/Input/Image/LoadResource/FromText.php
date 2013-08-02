@@ -42,6 +42,7 @@ class FromText extends Input implements LoadResourceInterface
     public function __construct($name = 'content',
                                 AbstractResourceFactory $resourceFactory)
     {
+        $this->abstractResourceFactory = $resourceFactory;
         $this->scanner = new Scanner(ImageResource::UNIQUE_RESOURCE_PREFIX);
         parent::__construct($name);
     }
