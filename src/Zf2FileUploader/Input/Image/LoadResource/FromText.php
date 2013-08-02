@@ -1,16 +1,18 @@
 <?php
-namespace Zf2FileUploader\Input\Image;
+namespace Zf2FileUploader\Input\Image\LoadResource;
 
-use Doctrine\ORM\EntityManager;
 use Zend\InputFilter\Input;
 use Zend\Validator\Callback;
 use Zend\Validator\File\MimeType;
-use Zf2FileUploader\Options\ImageResourceOptionsInterface;
+use Zf2FileUploader\Input\Image\LoadResourceInterface;
+use Zf2FileUploader\Input\Resource\Scanner\Text\Scanner;
+use Zf2FileUploader\Input\Resource\Scanner\Text\ScannerInterface;
 use Zf2FileUploader\Resource\AbstractFactory\PersistedResourceInterface as AbstractResourceFactory;
+use Zf2FileUploader\Resource\ImageResource;
 use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
 use Zf2FileUploader\Validator\ResourceTokenValidator;
 
-class LoadResource extends Input implements LoadResourceInterface
+class FromText extends Input implements LoadResourceInterface
 {
 
     /**
@@ -29,20 +31,19 @@ class LoadResource extends Input implements LoadResourceInterface
     protected $resources = array();
 
     /**
+     * @var ScannerInterface
+     */
+    protected $scanner;
+
+    /**
      * @param string $name
      * @param AbstractResourceFactory $resourceFactory
      */
-    public function __construct($name = 'image',
-                                AbstractResourceFactory $resourceFactory,
-                                EntityManager $entityManager,
-                                ImageResourceOptionsInterface $imageOptions)
+    public function __construct($name = 'content',
+                                AbstractResourceFactory $resourceFactory)
     {
+        $this->scanner = new Scanner(ImageResource::UNIQUE_RESOURCE_PREFIX);
         parent::__construct($name);
-
-        $this->abstractResourceFactory = $resourceFactory;
-        $validator = new ResourceTokenValidator($entityManager->getRepository($imageOptions->getImageEntityClass()));
-
-        $this->getValidatorChain()->attach($validator);
     }
 
     /**
@@ -64,14 +65,20 @@ class LoadResource extends Input implements LoadResourceInterface
 
         if ($this->isValid) {
 
-            $tokens = parent::getValue();
+            $value = parent::getValue();
 
-            if (is_array($tokens)) {
+            if (is_array($value)) {
+                $values = $value;
+            } else {
+                $values = array($value);
+            }
+
+            foreach($values as $value) {
+                $tokens = $this->scanner->scan($value);
+
                 foreach ($tokens as $token) {
                     $resources[] = $this->abstractResourceFactory->loadImageResource($token);
                 }
-            } else {
-                $resources[] = $this->abstractResourceFactory->loadImageResource($tokens);
             }
         }
 

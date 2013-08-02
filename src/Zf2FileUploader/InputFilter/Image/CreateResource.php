@@ -4,10 +4,12 @@ namespace Zf2FileUploader\InputFilter\Image;
 
 use Zend\InputFilter\InputFilter;
 use Zf2FileUploader\InputFilter\Image\CreateResourceInterface as ImageCreateResourceFilterInterface;
+use Zf2FileUploader\MessagesInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2FileUploader\Input\Image\CreateResourceInterface as InputImageCreateResourceInterface;
 
-class CreateResource extends InputFilter implements ImageCreateResourceFilterInterface
+class CreateResource extends InputFilter implements ImageCreateResourceFilterInterface,
+                                                    MessagesInterface
 {
     /**
      * @var CreateResourceInterface

@@ -24,11 +24,11 @@ class ResourceTokenValidator extends AbstractValidator
      */
     protected $repository;
 
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityRepository $repository, $options = null)
     {
         $this->repository = $repository;
 
-        parent::__construct();
+        parent::__construct($options);
     }
 
     /**

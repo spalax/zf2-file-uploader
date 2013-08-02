@@ -3,6 +3,8 @@ namespace Zf2FileUploader\Resource;
 
 abstract class AbstractResource implements ResourceInterface
 {
+    const UNIQUE_RESOURCE_PREFIX = 'uresource_';
+
     /**
      * @var string
      */
@@ -25,7 +27,7 @@ abstract class AbstractResource implements ResourceInterface
      */
     public function __construct($path, $ext, $token = null)
     {
-        $this->token = is_null($token) ? uniqid(md5($path)) : $token;
+        $this->token = is_null($token) ? static::UNIQUE_RESOURCE_PREFIX.uniqid(md5($path)) : $token;
         $this->ext = $ext;
         $this->path = $path;
     }

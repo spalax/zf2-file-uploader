@@ -34,7 +34,7 @@ return array(
         'Zf2FileUploader\Service\Image\BindService',
 
     'Zf2FileUploader\Input\Image\LoadResourceInterface' =>
-        'Zf2FileUploader\Input\Image\LoadResource',
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
 
     'Imagine\Image\ImagineInterface' =>
         'Imagine\Gd\Imagine',

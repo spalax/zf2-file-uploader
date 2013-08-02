@@ -4,11 +4,13 @@ namespace Zf2FileUploader\Controller\Images;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Zf2FileUploader\Paginator\DoctrineQueryRestPaginator;
+use Zf2FileUploader\Stdlib\Extractor\Paginator\ImageExtractor;
 use Zf2FileUploader\View\Model\PaginatorJsonModel;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Doctrine\ORM\Query\Expr;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;
+use Zf2Libs\Paginator\Doctrine\ViewModel\JsonModel;
 
 class ListController extends AbstractController
 {
@@ -44,10 +46,10 @@ class ListController extends AbstractController
                                                     $e->getRequest(),
                                                     $e->getResponse());
 
-        $objectHydrator = new DoctrineObject($this->entityManager,
-                                             $this->options->getImageEntityClass());
+        $imageExtractor = new ImageExtractor(new DoctrineObject($this->entityManager,
+                                                                $this->options->getImageEntityClass()));
 
-        $result = new PaginatorJsonModel($objectHydrator);
+        $result = new JsonModel($imageExtractor);
         $result->setPaginator($paginator);
 
         $e->setResult($result);
