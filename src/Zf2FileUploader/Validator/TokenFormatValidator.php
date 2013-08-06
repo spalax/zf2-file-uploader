@@ -1,13 +1,13 @@
 <?php
 namespace Zf2FileUploader\Validator;
 
-use Doctrine\ORM\EntityRepository;
 use Zend\Validator\AbstractValidator;
+use Zend\I18n\Validator\Alnum as AlnumValidator;
 use Zend\Validator\Exception;
 
-class ResourceTokenValidator extends AbstractValidator
+class TokenFormatValidator extends AbstractValidator
 {
-    const INVALID        = 'tokenInvalid';
+    const INVALID        = 'tokenInvalidFormat';
 
     /**
      * Validation failure message template definitions
@@ -15,20 +15,8 @@ class ResourceTokenValidator extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID        => "Invalid token given."
+        self::INVALID        => "Invalid token format given."
     );
-
-    /**
-     * @var EntityRepository
-     */
-    protected $repository;
-
-    public function __construct(EntityRepository $repository, $options = null)
-    {
-        $this->repository = $repository;
-        $this->tokenFormatValidator = new TokenFormatValidator();
-        parent::__construct($options);
-    }
 
     /**
      * Returns true if and only if $value meets the validation requirements
@@ -56,31 +44,22 @@ class ResourceTokenValidator extends AbstractValidator
     }
 
     /**
-     * @return array
-     */
-    public function getMessages()
-    {
-        $messages = parent::getMessages();
-        return array_unique(array_merge($messages, $this->tokenFormatValidator->getMessages()));
-    }
-
-    /**
      * @param string $token
      * @return bool
      */
     protected function validate($token)
     {
-        if (!$this->tokenFormatValidator->isValid($token)) {
+        if (!strpos($token, '_')) {
+            $this->error(self::INVALID);
             return false;
         }
 
-        $qb = $this->repository->createQueryBuilder('r');
-        $qb->select('1')
-           ->where('r.token = :t');
+        $validator = new AlnumValidator();
 
-        $qb->setParameter('t', $token);
+        $tokenParts = explode('_', $token);
 
-        if (!count($qb->getQuery()->getResult())) {
+        if (!$validator->isValid($tokenParts[0]) ||
+            !$validator->isValid($tokenParts[1])) {
             $this->error(self::INVALID);
             return false;
         }
