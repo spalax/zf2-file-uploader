@@ -9,6 +9,12 @@ return array(
     'Zf2FileUploader\Options\ImageResourceOptionsInterface' =>
         'Zf2FileUploader\Options\ModuleOptions',
 
+    'Zf2FileUploader\Image\Box\ImageBoxFactoryInterface' =>
+        'Zf2FileUploader\Image\Box\ImageBoxFactory',
+
+    'Zf2FileUploader\Filter\Thumbnail\PathFilterFactoryInterface' =>
+        'Zf2FileUploader\Filter\Thumbnail\PathFilterFactory',
+
     'Zf2FileUploader\I18n\Translator\TranslatorInterface' =>
         'Zf2FileUploader\I18n\Translator\Translator',
 

@@ -1,7 +1,6 @@
 <?php
 namespace Zf2FileUploader\Filter\Thumbnail;
 
-use Imagine\Image\BoxInterface;
 use Zend\Filter\Exception;
 use Zend\Filter\FilterInterface;
 
@@ -18,19 +17,13 @@ class PathFilter implements FilterInterface
     protected $height;
 
     /**
-     * @param array | BoxInterface $data
+     * @param int $width
+     * @param int $height
      */
-    public function __construct($data)
+    public function __construct($width, $height)
     {
-        if ($data instanceof BoxInterface) {
-            $this->width = $data->getWidth();
-            $this->height = $data->getHeight();
-        } else if (func_num_args() > 1) {
-            list($this->width, $this->height) = func_get_args();
-        } else if (is_array($data) && array_key_exists('width', $data) && array_key_exists('height', $data)) {
-            $this->width = $data['width'];
-            $this->height = $data['height'];
-        }
+        $this->width = $width;
+        $this->height = $height;
     }
 
     /**
