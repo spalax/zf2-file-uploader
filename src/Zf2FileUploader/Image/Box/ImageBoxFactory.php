@@ -11,16 +11,24 @@ class ImageBoxFactory implements ImageBoxFactoryInterface
      */
     public function getImageBox($data)
     {
-        if (func_num_args() > 1) {
-            list($width, $height) = func_get_args();
-        } else if ((is_array($data) && array_key_exists('width', $data) && array_key_exists('height', $data))
-                   || preg_match('/^(?P<width>[0-9]+)x(?P<height>[0-9]+)$/', $data, $data)) {
-            $width = $data['width'];
-            $height = $data['height'];
-        } else {
+        if (!(is_array($data) && array_key_exists('width', $data) && array_key_exists('height', $data)) &&
+            !(preg_match('/^(?P<width>[0-9]+)x(?P<height>[0-9]+)$/', $data, $data))) {
             throw new Exception\InvalidArgumentException("Could not retrieve width and height from data for ImageBox");
         }
 
-        return new Box($width, $height);
+        $width = $data['width'];
+        $height = $data['height'];
+
+        $box = new Box($width, $height);
+
+        if (array_key_exists('strategy', $data)) {
+            if ($data['strategy'] == 'widen') {
+                $box->widen($width);
+            }else if ($data['strategy'] == 'heighten') {
+                $box->heighten($height);
+            }
+        }
+
+        return $box;
     }
 }
