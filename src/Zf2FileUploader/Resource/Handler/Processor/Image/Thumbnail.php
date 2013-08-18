@@ -51,7 +51,7 @@ class Thumbnail implements ImageProcessorInterface
     {
         $image = $this->imageService->open($resource->getPath());
 
-        $mode = ImagineImageInterface::THUMBNAIL_OUTBOUND;
+        $mode = ImagineImageInterface::THUMBNAIL_INSET;
 
         $image->thumbnail($this->imageBox, $mode)
               ->save($this->pathFilter->filter($resource->getPath()),

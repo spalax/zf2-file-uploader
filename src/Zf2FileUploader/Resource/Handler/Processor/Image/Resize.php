@@ -41,7 +41,7 @@ class Resize implements ImageProcessorInterface
     {
         $image = $this->imageService->open($resource->getPath());
 
-        $mode = ImagineImageInterface::THUMBNAIL_OUTBOUND;
+        $mode = ImagineImageInterface::THUMBNAIL_INSET;
 
         $image->thumbnail($this->imageBox, $mode)
             ->save($resource->getPath(),
