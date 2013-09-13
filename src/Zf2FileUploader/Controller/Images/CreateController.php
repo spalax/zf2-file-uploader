@@ -46,7 +46,7 @@ class CreateController extends AbstractCreateController
      * @param MvcEvent $e
      * @return mixed | void
      */
-    public function onDispatch(MvcEvent $e)
+    public function onDispatch(MvcEvent $mvcEvent)
     {
         try {
             foreach ($this->getDataResourceCreator()->getResources() as $resource) {
@@ -56,9 +56,10 @@ class CreateController extends AbstractCreateController
 
             $this->uploaderModel->success();
         } catch (\Exception $e) {
+            $this->uploaderModel->addMessage($e->getMessage());
             $this->uploaderModel->fail();
         }
 
-        $e->setResult($this->uploaderModel);
+        $mvcEvent->setResult($this->uploaderModel);
     }
 }

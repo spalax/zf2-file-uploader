@@ -46,7 +46,7 @@ class FilesystemPersister extends AbstractFilesystemPersister implements ImagePe
 
         $result = file_exists($target);
         if ($result) {
-            chmod($target, '0664');
+            $result = chmod($target, 0664);
         }
 
         $resource->setHttpPath($this->options->getImageHttpPath().'/'.$baseName);
