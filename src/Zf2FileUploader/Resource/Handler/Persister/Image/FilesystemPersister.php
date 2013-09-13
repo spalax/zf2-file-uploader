@@ -43,6 +43,12 @@ class FilesystemPersister extends AbstractFilesystemPersister implements ImagePe
         $moveUploadedFilter->filter($resource->getPath());
 
         $resource->setPath($target);
+
+        $result = file_exists($target);
+        if ($result) {
+            chmod($target, '0664');
+        }
+
         $resource->setHttpPath($this->options->getImageHttpPath().'/'.$baseName);
 
         $this->setCallbacks(null, function () use ($target) {
@@ -51,6 +57,6 @@ class FilesystemPersister extends AbstractFilesystemPersister implements ImagePe
             }
         });
 
-        return file_exists($target);
+        return $result;
     }
 }
