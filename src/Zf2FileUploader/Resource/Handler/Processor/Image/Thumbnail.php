@@ -55,7 +55,8 @@ class Thumbnail implements ImageProcessorInterface
 
         $image->thumbnail($this->imageBox, $mode)
               ->save($this->pathFilter->filter($resource->getPath()),
-                     array('format'=>$resource->getExt()));
+                     array('format'=>$resource->getExt(),
+                           'quality'=>'100'));
 
         return true;
     }
