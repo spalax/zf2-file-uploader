@@ -1,11 +1,7 @@
 {
-    "name": "milcrew/zf2-file-uploader",
+    "name": "mils/zf2-file-uploader",
     "description": "File Uploader module for Zf2",
     "authors": [
-        {
-            "name": "Milcrew",
-            "email": "milcrew@gmail.com"
-        },
         {
             "name": "Mylotskyi Oleksii",
             "email": "spalaxinco@gmail.com"
@@ -18,7 +14,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3",
-        "milcrew/zf2-libs": "dev-master",
+        "mils/zf2-libs": "dev-master",
         "zendframework/zendframework": ">=2.0.0",
         "doctrine/doctrine-module": ">=0.7.2",
         "doctrine/doctrine-orm-module": ">=0.7.0",
