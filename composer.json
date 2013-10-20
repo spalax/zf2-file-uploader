@@ -1,5 +1,5 @@
 {
-    "name": "mils/zf2-file-uploader",
+    "name": "spalax/zf2-file-uploader",
     "description": "File Uploader module for Zf2",
     "authors": [
         {
@@ -14,7 +14,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3",
-        "mils/zf2-libs": "dev-master",
+        "spalax/zf2-libs": "dev-master",
         "zendframework/zendframework": ">=2.0.0",
         "doctrine/doctrine-module": ">=0.7.2",
         "doctrine/doctrine-orm-module": ">=0.7.0",
