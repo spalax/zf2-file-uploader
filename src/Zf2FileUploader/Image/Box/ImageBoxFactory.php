@@ -7,6 +7,7 @@ class ImageBoxFactory implements ImageBoxFactoryInterface
 {
     /**
      * @param string | array $data
+     * @throws Exception\InvalidArgumentException
      * @return Box
      */
     public function getImageBox($data)

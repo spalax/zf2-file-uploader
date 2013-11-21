@@ -1,7 +1,7 @@
 <?php
 namespace Zf2FileUploader\Service\Response;
 
-use Zf2FileUploader\MessagesInterface;
+use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2FileUploader\Resource\ResourceInterface;
 
 interface ResponseInterface extends MessagesInterface

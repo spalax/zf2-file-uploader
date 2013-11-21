@@ -21,9 +21,9 @@ class ImageTemporaryCleaner extends ResourceTemporaryCleaner implements CleanerS
 
     /**
      * @param EntityManager $entityManager
-     * @param TemporaryCleanerOptionsInterface $options
+     * @param \Zf2FileUploader\Options\TemporaryCleanerOptionsInterface $temporaryOptions
+     * @param \Zf2FileUploader\Options\ImageResourceOptionsInterface $imageOptions
      * @param RemoverInterface $remover
-     * @param EntityRepository $repository
      */
     public function __construct(EntityManager $entityManager,
                                 TemporaryCleanerOptionsInterface $temporaryOptions,

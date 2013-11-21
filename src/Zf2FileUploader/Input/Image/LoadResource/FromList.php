@@ -32,6 +32,8 @@ class FromList extends Input implements LoadResourceInterface
     /**
      * @param string $name
      * @param AbstractResourceFactory $resourceFactory
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param \Zf2FileUploader\Options\ImageResourceOptionsInterface $imageOptions
      */
     public function __construct($name = 'image',
                                 AbstractResourceFactory $resourceFactory,

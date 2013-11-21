@@ -20,7 +20,6 @@ abstract class AbstractCreateResource extends FileInput
     }
 
     /**
-     * @param array $data
      * @param array $value
      * @return array
      */

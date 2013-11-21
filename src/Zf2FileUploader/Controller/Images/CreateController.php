@@ -22,6 +22,7 @@ class CreateController extends AbstractCreateController
     protected $createResourceData;
 
     /**
+     * @param \Zf2FileUploader\View\Model\UploaderModelInterface $uploaderModel
      * @param ImageCreateResourceFilterInterface $createResourceData
      * @param SaveServiceInterface $saveService
      */
@@ -43,7 +44,7 @@ class CreateController extends AbstractCreateController
     }
 
     /**
-     * @param MvcEvent $e
+     * @param \Zend\Mvc\MvcEvent $mvcEvent
      * @return mixed | void
      */
     public function onDispatch(MvcEvent $mvcEvent)

@@ -5,7 +5,7 @@ use Zend\View\Model\ViewModel;
 use Zf2FileUploader\Resource\ResourceViewableInterface;
 use Zf2FileUploader\View\Filter\FilterInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
-use Zf2FileUploader\MessagesInterface;
+use Zf2Libs\Stdlib\Messages\MessagesInterface;
 
 class UploaderModel extends ViewModel implements UploaderModelInterface
 {

@@ -2,13 +2,13 @@
 namespace Zf2FileUploader\Filter\Thumbnail;
 
 use Imagine\Image\BoxInterface;
-use Zend\Filter\Exception;
 
 class PathFilterFactory implements PathFilterFactoryInterface
 {
     /**
      * @param array | BoxInterface $data
      *
+     * @throws \Zf2FileUploader\Filter\Thumbnail\Exception\InvalidArgumentException
      * @return PathFilter
      */
     public function getPathFilter($data)

@@ -5,7 +5,6 @@ use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Zf2FileUploader\Paginator\DoctrineQueryRestPaginator;
 use Zf2FileUploader\Stdlib\Extractor\Paginator\ImageExtractor;
-use Zf2FileUploader\View\Model\PaginatorJsonModel;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Doctrine\ORM\Query\Expr;

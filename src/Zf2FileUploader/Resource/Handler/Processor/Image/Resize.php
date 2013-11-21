@@ -23,7 +23,7 @@ class Resize implements ImageProcessorInterface
     /**
      * @param string | array $data allowed format 100x100, array('width'=>100, 'height'=>100)
      * @param ImagineInterface $imageService
-     * @param ImageBoxInterface $imageBox
+     * @param \Zf2FileUploader\Image\Box\ImageBoxFactoryInterface $imageBoxFactory
      */
     public function __construct($data,
                                 ImagineInterface $imageService,

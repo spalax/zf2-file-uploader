@@ -37,9 +37,8 @@ class ResourceTokenValidator extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param  mixed $value
+     * @param mixed $tokens
      * @return bool
-     * @throws Exception\RuntimeException If validation of $value is impossible
      */
     public function isValid($tokens)
     {

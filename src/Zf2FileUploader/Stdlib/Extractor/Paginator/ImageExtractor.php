@@ -3,7 +3,7 @@ namespace Zf2FileUploader\Stdlib\Extractor\Paginator;
 
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zf2FileUploader\Entity\ImageInterface;
-use Front\Stdlib\Extractor\Exception\InvalidArgumentException;
+use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 
 class ImageExtractor implements ExtractorInterface
@@ -22,6 +22,7 @@ class ImageExtractor implements ExtractorInterface
      * Extract values from an object
      *
      * @param  object $object
+     * @throws \Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException
      * @return array
      */
     public function extract($object)

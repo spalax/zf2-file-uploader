@@ -17,7 +17,7 @@ class DatabaseRemover implements RemoverInterface
     }
 
     /**
-     * @param ResourceInterface $resource
+     * @param \Zf2FileUploader\Entity\ResourceInterface $entity
      * @return boolean
      */
     public function remove(ResourceInterface $entity)

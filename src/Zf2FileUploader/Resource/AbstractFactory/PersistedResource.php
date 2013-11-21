@@ -15,7 +15,7 @@ class PersistedResource implements PersistedResourceInterface
     }
 
     /**
-     * @param array $data
+     * @param string $token
      * @return ImageResource | null
      */
     public function loadImageResource($token)

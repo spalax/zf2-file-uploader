@@ -24,7 +24,7 @@ class BindService implements BindServiceInterface
     /**
      * @param ImageResourceInterface $resource
      * @param ImageBindInterface $binder
-     * @throws DomainException
+     * @throws \Exception
      */
     public function bind(ImageResourceInterface $resource, ImageBindInterface $binder)
     {

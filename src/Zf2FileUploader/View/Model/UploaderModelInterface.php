@@ -4,7 +4,7 @@ namespace Zf2FileUploader\View\Model;
 use Zend\View\Model\ModelInterface;
 use Zf2FileUploader\Resource\ResourceViewableInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
-use Zf2FileUploader\MessagesInterface;
+use Zf2Libs\Stdlib\Messages\MessagesInterface;
 
 interface UploaderModelInterface extends ModelInterface
 {

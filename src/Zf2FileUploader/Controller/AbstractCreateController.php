@@ -1,7 +1,7 @@
 <?php
 namespace Zf2FileUploader\Controller;
 
-use Zf2FileUploader\InputFilter\ResourceInterface as ResourceDataInterface;
+use Zf2FileUploader\Resource\ResourceInterface as ResourceDataInterface;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;

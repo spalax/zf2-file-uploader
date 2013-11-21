@@ -30,8 +30,8 @@ class Thumbnail implements ImageProcessorInterface
     /**
      * @param string | array $data allowed format 100x100, array('width'=>100, 'height'=>100)
      * @param ImagineInterface $imageService
-     * @param ImageBoxInterface $imageBox
-     * @param FilterInterface $pathFilter
+     * @param \Zf2FileUploader\Image\Box\ImageBoxFactoryInterface $imageBoxFactory
+     * @param \Zf2FileUploader\Filter\Thumbnail\PathFilterFactoryInterface $pathFilterFactory
      */
     public function __construct($data,
                                 ImagineInterface $imageService,
