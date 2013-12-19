@@ -30,6 +30,6 @@ class CreateResource extends InputFilter implements ImageCreateResourceFilterInt
      */
     public function getResources()
     {
-        return $this->resourceInput->getResources();
+        return $this->resourceInput->getValue();
     }
 }

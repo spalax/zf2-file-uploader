@@ -32,7 +32,7 @@ return array(
 
     'view_manager' => array(
         'strategies' => array(
-            'Zf2FileUploader\View\Strategy\UploaderStrategy'
+            'Zf2Libs\View\Strategy\UploaderStrategy'
         )
     )
 );

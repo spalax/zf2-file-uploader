@@ -1,15 +1,17 @@
 <?php
 namespace Zf2FileUploader\Controller\Images;
 
+use Backend\Factory\DojoRestStorePaginatorFactory;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
-use Zf2FileUploader\Paginator\DoctrineQueryRestPaginator;
 use Zf2FileUploader\Stdlib\Extractor\Paginator\ImageExtractor;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Doctrine\ORM\Query\Expr;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;
+use Zf2Libs\Paginator\Doctrine\QueryPaginator;
 use Zf2Libs\Paginator\Doctrine\ViewModel\JsonModel;
+use Zf2Libs\Paginator\DojoRestStore\Paginator;
 
 class ListController extends AbstractController
 {
@@ -26,8 +28,11 @@ class ListController extends AbstractController
     /**
      * @param EntityManager $entityManager
      * @param ImageResourceOptionsInterface $options
+     * @param DojoRestStorePaginatorFactory $storePaginatorFactory
      */
-    public function __construct(EntityManager $entityManager, ImageResourceOptionsInterface $options)
+    public function __construct(EntityManager $entityManager,
+                                ImageResourceOptionsInterface $options,
+                                DojoRestStorePaginatorFactory $storePaginatorFactory)
     {
         $this->entityManager = $entityManager;
         $this->options = $options;
@@ -39,14 +44,18 @@ class ListController extends AbstractController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $paginator = new DoctrineQueryRestPaginator($this->entityManager
-                                                         ->getRepository($this->options->getImageEntityClass())
-                                                         ->createQueryBuilder('img'),
-                                                    $e->getRequest(),
-                                                    $e->getResponse());
+
+        $adapter = new QueryPaginator($this->entityManager
+                                           ->getRepository($this->options->getImageEntityClass())
+                                           ->createQueryBuilder('img'));
+
+        $paginator = new Paginator($adapter,
+                             $this->getRequest()->getHeaders(),
+                             $this->getResponse()->getHeaders());
 
         $imageExtractor = new ImageExtractor(new DoctrineObject($this->entityManager,
                                                                 $this->options->getImageEntityClass()));
+
 
         $result = new JsonModel($imageExtractor);
         $result->setPaginator($paginator);

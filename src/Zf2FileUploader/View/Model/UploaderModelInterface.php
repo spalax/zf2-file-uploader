@@ -5,8 +5,9 @@ use Zend\View\Model\ModelInterface;
 use Zf2FileUploader\Resource\ResourceViewableInterface;
 use Zf2FileUploader\View\Model\Exception\InvalidArgumentException;
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
+use Zf2Libs\View\Model\Uploader\UploaderModelInterface as Zf2LibsUploaderModelInterface;
 
-interface UploaderModelInterface extends ModelInterface
+interface UploaderModelInterface extends ModelInterface, Zf2LibsUploaderModelInterface
 {
     /**
      * @return UploaderModelInterface
