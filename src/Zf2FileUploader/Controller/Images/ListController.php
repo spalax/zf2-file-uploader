@@ -10,7 +10,7 @@ use Zend\Mvc\MvcEvent;
 use Doctrine\ORM\Query\Expr;
 use Zf2FileUploader\Options\ImageResourceOptionsInterface;
 use Zf2Libs\Paginator\Doctrine\QueryPaginator;
-use Zf2Libs\Paginator\Doctrine\ViewModel\JsonModel;
+use Zf2Libs\Paginator\ViewModel\JsonModel;
 use Zf2Libs\Paginator\DojoRestStore\Paginator;
 
 class ListController extends AbstractController
