@@ -80,6 +80,14 @@ class UploaderModel extends ViewModel implements UploaderModelInterface
     }
 
     /**
+     * @return array
+     */
+    public function getResourcePaths()
+    {
+        return $this->getVariable('resources');
+    }
+
+    /**
      * @param string | MessagesInterface $message
      * @return UploaderModel
      * @throws InvalidArgumentException

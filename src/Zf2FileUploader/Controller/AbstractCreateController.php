@@ -1,13 +1,13 @@
 <?php
 namespace Zf2FileUploader\Controller;
 
-use Zf2FileUploader\Resource\ResourceInterface as ResourceDataInterface;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zf2FileUploader\View\Model\UploaderModelInterface;
+use Zf2Libs\Data\DataInterface;
 
 abstract class AbstractCreateController extends AbstractController
 {
@@ -22,7 +22,7 @@ abstract class AbstractCreateController extends AbstractController
     protected $uploaderModel;
 
     /**
-     * @return ResourceDataInterface
+     * @return DataInterface
      */
     abstract protected function getDataResourceCreator();
 

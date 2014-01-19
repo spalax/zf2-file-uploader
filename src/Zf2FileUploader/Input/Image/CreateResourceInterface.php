@@ -6,7 +6,12 @@ use Zf2FileUploader\Resource\ImageResourceInterface;
 interface CreateResourceInterface
 {
     /**
-     * @return ImageResourceInterface[]
+     * @return mixed
      */
     public function getValue();
+
+    /**
+     * @return ImageResourceInterface[]
+     */
+    public function getResources();
 }

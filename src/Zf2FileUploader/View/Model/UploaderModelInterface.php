@@ -31,6 +31,11 @@ interface UploaderModelInterface extends ModelInterface, Zf2LibsUploaderModelInt
     public function addResource(ResourceViewableInterface $resource);
 
     /**
+     * @return array
+     */
+    public function getResourcePaths();
+
+    /**
      * @param string | MessagesInterface $message
      * @return UploaderModel
      * @throws InvalidArgumentException

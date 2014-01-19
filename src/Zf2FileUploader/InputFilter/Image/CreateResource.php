@@ -6,10 +6,12 @@ use Zend\InputFilter\InputFilter;
 use Zf2FileUploader\InputFilter\Image\CreateResourceInterface as ImageCreateResourceFilterInterface;
 use Zf2FileUploader\Resource\ImageResourceInterface;
 use Zf2FileUploader\Input\Image\CreateResourceInterface as InputImageCreateResourceInterface;
+use Zf2Libs\Data\DataInterface;
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
 
 class CreateResource extends InputFilter implements ImageCreateResourceFilterInterface,
-                                                    MessagesInterface
+                                                    MessagesInterface, DataInterface
+
 {
     /**
      * @var InputImageCreateResourceInterface
@@ -30,6 +32,6 @@ class CreateResource extends InputFilter implements ImageCreateResourceFilterInt
      */
     public function getResources()
     {
-        return $this->resourceInput->getValue();
+        return $this->resourceInput->getResources();
     }
 }
