@@ -1,7 +1,6 @@
 <?php
 namespace Zf2FileUploader\Controller\Images;
 
-use Backend\Factory\DojoRestStorePaginatorFactory;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Zf2FileUploader\Stdlib\Extractor\Paginator\ImageExtractor;
@@ -28,11 +27,9 @@ class ListController extends AbstractController
     /**
      * @param EntityManager $entityManager
      * @param ImageResourceOptionsInterface $options
-     * @param DojoRestStorePaginatorFactory $storePaginatorFactory
      */
     public function __construct(EntityManager $entityManager,
-                                ImageResourceOptionsInterface $options,
-                                DojoRestStorePaginatorFactory $storePaginatorFactory)
+                                ImageResourceOptionsInterface $options)
     {
         $this->entityManager = $entityManager;
         $this->options = $options;
