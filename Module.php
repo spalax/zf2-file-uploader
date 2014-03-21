@@ -4,7 +4,6 @@ namespace Zf2FileUploader;
 use Zf2FileUploader\Options\ModuleOptions;
 use Zend\Di\Di;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 
 class Module
 {
