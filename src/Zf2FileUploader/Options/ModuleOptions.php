@@ -47,6 +47,11 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     protected $fileInputName = 'file';
 
     /**
+     * @var bool
+     */
+    protected $enableDefaultEntities = true;
+
+    /**
      * @var string | null
      */
     protected $translator = null;
@@ -134,5 +139,21 @@ class ModuleOptions extends AbstractOptions implements ModuleOptionsInterface
     public function getImageEntityClass()
     {
         return $this->imageEntityClass;
+    }
+
+    /**
+     * @param boolean $enableDefaultEntities
+     */
+    public function setEnableDefaultEntities($enableDefaultEntities)
+    {
+        $this->enableDefaultEntities = $enableDefaultEntities;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnableDefaultEntities()
+    {
+        return $this->enableDefaultEntities;
     }
 }
