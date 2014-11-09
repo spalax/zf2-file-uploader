@@ -9,8 +9,8 @@ use Zf2Libs\Stdlib\Messages\MessagesInterface;
 
 class UploaderModel extends ViewModel implements UploaderModelInterface
 {
-    const STATUS_SUCCESS = 'success';
-    const STATUS_FAILED = 'failed';
+    const STATUS_SUCCESS = 1;
+    const STATUS_FAILED = 0;
 
     /**
      * Uploader model is usually terminal
