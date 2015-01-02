@@ -15,4 +15,10 @@ interface LoadResourceInterface
      * @return LoadResourceInterface
      */
     public function setAllowEmpty($allowEmpty);
+
+    /**
+     * @param bool $required
+     * @return LoadResourceInterface
+     */
+    public function setRequired($required);
 }
