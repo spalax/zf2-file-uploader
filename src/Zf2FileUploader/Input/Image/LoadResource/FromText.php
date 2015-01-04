@@ -78,7 +78,11 @@ class FromText extends Input implements LoadResourceInterface
                 $tokens = $this->scanner->scan($value);
 
                 foreach ($tokens as $token) {
-                    $resources[] = $this->abstractResourceFactory->loadImageResource($token);
+                    $loaded = $this->abstractResourceFactory->loadImageResource($token);
+                    if (is_null($loaded)) {
+                        continue;
+                    }
+                    $resources[] = $loaded;
                 }
             }
         }

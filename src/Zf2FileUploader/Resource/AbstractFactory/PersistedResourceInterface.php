@@ -7,7 +7,7 @@ interface PersistedResourceInterface
 {
     /**
      * @param string $token
-     * @return ImageResourceInterface
+     * @return ImageResourceInterface | null
      */
     public function loadImageResource($token);
 }
